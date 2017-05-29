@@ -1,0 +1,14 @@
+//
+//  EG_NoticeCenterDefine.swift
+//  Emergency
+//
+//  Created by shumin.tao on 2017/5/24.
+//  Copyright © 2017年 yidian. All rights reserved.
+//
+
+import UIKit
+
+//定义重用的CellID
+let EGSettingCellID = "EGSettingCell"
+let EGMineCellID =  "EGMineCellID"
+		

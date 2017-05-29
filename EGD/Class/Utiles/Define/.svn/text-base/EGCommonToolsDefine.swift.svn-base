@@ -1,0 +1,46 @@
+//
+//  EGCommonToolsDefine.swift
+//  Emergency
+//
+//  Created by shumin.tao on 2017/5/23.
+//  Copyright © 2017年 yidian. All rights reserved.
+//
+
+import UIKit
+
+//以5s为比例缩放系数
+ let ScreenScale  = (kMainBoundsWidth / 375.0)
+
+//判断IOS7
+let iOS7 = (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) ? false : true
+
+let NavBarHeight  = (iOS7 ? 64.0 : 44.0)
+
+let StatusBarHeight  = (iOS7 ? 20.0 : 0.0)
+
+//获取IOS版本号
+let infoDictionary = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String 
+
+let deviceUUID = UIDevice.current.identifierForVendor?.uuid //获取设备唯一标识符 UUID
+let deviceName = UIDevice.current.name  //获取设备名称
+let sysName = UIDevice.current.systemName //获取系统名称 例如：iPhone OS
+let sysVersion = UIDevice.current.systemVersion //获取系统版本 例如：9.2
+let deviceModel = UIDevice.current.model //获取设备的型号 例如：iPhone
+
+// 当前系统版本
+let CurrentVersion = UIDevice.current.systemVersion.hashValue
+
+
+//定义数值
+let CellHeight = 88*ScreenScale
+let TOP        = 15*ScreenScale
+let LEFT       = 15*ScreenScale
+
+
+
+
+
+
+
+
+

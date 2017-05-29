@@ -1,0 +1,9 @@
+//
+//  EG_hirdLib_APPKey.swift
+//  Emergency
+//
+//  Created by shumin.tao on 2017/5/23.
+//  Copyright © 2017年 yidian. All rights reserved.
+//
+
+import UIKit

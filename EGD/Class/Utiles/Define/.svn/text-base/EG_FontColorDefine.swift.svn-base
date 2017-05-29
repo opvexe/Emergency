@@ -1,0 +1,61 @@
+//
+//  EG_FontColorDefine.swift
+//  Emergency
+//
+//  Created by shumin.tao on 2017/5/23.
+//  Copyright © 2017年 yidian. All rights reserved.
+//
+
+import UIKit
+
+extension UIColor {
+    //MARK: - 十六进制返回颜色
+  class  func colorWithHex(_ hexValue:u_long) ->  UIColor{
+        
+        let red = ((Float)((hexValue & 0xFF0000) >> 16))/255.0;
+        let green = ((Float)((hexValue & 0xFF00) >> 8))/255.0;
+        let blue = ((Float)(hexValue & 0xFF))/255.0;
+        let ResultColor = UIColor.init(colorLiteralRed: red, green: green, blue: blue, alpha: 1)
+        return ResultColor
+    }
+    //MARK: - 十六进制与透明度返回颜色
+  class  func colorWithHexAlpha(_ hexValue:u_long,alpha:CGFloat) -> UIColor {
+        let red = ((Float)((hexValue & 0xFF0000) >> 16))/255.0;
+        let green = ((Float)((hexValue & 0xFF00) >> 8))/255.0;
+        let blue = ((Float)(hexValue & 0xFF))/255.0;
+        let ResultColor = UIColor.init(colorLiteralRed: red, green: green, blue: blue, alpha: Float(alpha))
+        return ResultColor
+    }
+    //MARK: - RGB与透明度返回颜色
+   class func colorWithRGBAlpha(_ red:CGFloat,green:CGFloat,blue:CGFloat,alpha:CGFloat) -> UIColor {
+        let resultColor = UIColor.init(red: red, green: green, blue: blue, alpha: alpha)
+        return resultColor
+    }
+    //MARK: - 主体颜色
+   class func themeColor() -> UIColor {
+        let themecolor = self.colorWithHex(0xFF1860)
+        return themecolor
+    }
+    //MARK: - 主题字体颜色
+   class func themeCharacterColor() -> UIColor {
+        let themecharactercolor = self.colorWithHex(0xFFFFFF)
+        return themecharactercolor
+    }
+    //MARK: - 主题tabBar文字颜色
+   class func themeBottomBarTitleNormalColor() -> UIColor {
+        let resultColor = self.colorWithHex(0xC0C0C0)
+        return resultColor
+    }
+}
+
+//设计规范颜色
+let normalColor = UIColor.init(red: 201/255.0, green: 201/255.0, blue: 201/255.0, alpha: 1.0)  //正常颜色
+let KBlue = UIColor.init(colorLiteralRed: 0/255.0, green: 159/255.0, blue: 232/255.0, alpha: 1)
+let KGray = UIColor.init(colorLiteralRed: 245/255.0, green: 245/255.0, blue: 245/255.0, alpha: 1)
+let KFontRed = UIColor.init(colorLiteralRed: 231/255.0, green: 68/255.0, blue: 80/255.0, alpha: 1)
+let KFontBlack = UIColor.init(colorLiteralRed: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1)
+let KFontGray = UIColor.init(colorLiteralRed: 102/255.0, green: 102/255.0, blue: 102/255.0, alpha: 1)
+let KCellGreen = UIColor.init(colorLiteralRed: 7/255.0, green: 157/255.0, blue: 85/255.0, alpha: 1)
+
+
+

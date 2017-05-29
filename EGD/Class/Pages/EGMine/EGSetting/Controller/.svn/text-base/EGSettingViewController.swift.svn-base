@@ -1,0 +1,123 @@
+//
+//  EGSettingViewController.swift
+//  Emergency
+//
+//  Created by shumin.tao on 2017/5/23.
+//  Copyright © 2017年 yidian. All rights reserved.
+//
+
+import UIKit
+import MJExtension
+
+
+class EGSettingViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,clickSwitchDelagate {
+    
+    var setCellArray:NSMutableArray?
+    var tableView = UITableView.init()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.title = "设置"
+        configCellFromDateSource()
+        setupTableView()
+    }
+    
+    
+    //获取不同的Cell
+    fileprivate func configCellFromDateSource() {
+        let dataArray = [["leftTitle":"推送通知开关","isHiddenSwitch":"1"],
+                         ["leftTitle":"修改密码","iconRightImage":"home_more","className":""],
+                         ["leftTitle":"系统更新","rightTitle":"当前版本号 : " + infoDictionary]]
+        setCellArray = EGSettingModel.mj_objectArray(withKeyValuesArray: dataArray)
+        
+    }
+    
+    /// 创建tableView
+    private func setupTableView() {
+        tableView.frame = view.bounds
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.showsHorizontalScrollIndicator = false
+        tableView.backgroundColor = KGray
+        //tableView.separatorStyle = UITableViewCellSeparatorStyle.none  //隐藏线条
+        tableView.rowHeight = 44*ScreenScale
+        view.addSubview(tableView)
+        
+        let footView = MineSetingFooterView.init(frame: CGRect.init(x: 0, y: 0, width: kMainBoundsWidth, height: 160))
+        tableView.tableFooterView = footView
+        footView.logOutBtn = {
+            let alert = WQAlertView()
+            alert.showAlert(withCurrentViewController: self, title: "提示", message: "确定要退出登录？", confirmName: "退出", cancelName: "取消", confirmBlock: {
+                //网络请求
+                let request = MineRequest()
+                request.needPrintResult = true
+                request.logout()
+                
+                //退出界面
+                Global.clear()
+                appDelegate.showCurrent()
+            }, cancel: nil)
+        }
+    }
+}
+
+//UITableViewDelegate
+extension EGSettingViewController{
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return setCellArray!.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        var cell = tableView.dequeueReusableCell(withIdentifier:EGSettingCellID) as?EGSettingTableViewCell
+        if cell == nil {
+            cell = EGSettingTableViewCell.init(style: .default, reuseIdentifier: EGSettingCellID)
+        }
+        cell?.setting = setCellArray?[indexPath.row] as?EGSettingModel
+        
+        cell?.delegate = self
+        
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+    }
+}
+
+
+
+//didDelegateAction
+extension EGSettingViewController{
+    
+    func didDelegateAction(switchSender: UISwitch) {
+         if Global.shared.currentAccount?.doctorSwitch == 1{
+            NetworkRequest.shared.post(url: doctorSwitchPush_URL, params:["switchDoctor":0], success: { (success) in
+                WQProgressHUD.showSuccess(withStatus: "关闭推送成功")
+            }, failure: { (error) in
+                WQProgressHUD.showError(withStatus: "请检查网络")
+            })
+         }else{
+
+            NetworkRequest.shared.post(url: doctorSwitchPush_URL, params:["switchDoctor":1], success: { (success) in
+                WQProgressHUD.showSuccess(withStatus: "打开推送成功")
+            }, failure: { (error) in
+                WQProgressHUD.showError(withStatus: "请检查网络")
+            })
+        }
+    }
+}
+
+
+
+
+

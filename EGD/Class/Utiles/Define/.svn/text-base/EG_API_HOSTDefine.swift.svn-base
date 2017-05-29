@@ -1,0 +1,83 @@
+//
+//  EG_API_HOSTDefine.swift
+//  Emergency
+//
+//  Created by shumin.tao on 2017/5/23.
+//  Copyright © 2017年 yidian. All rights reserved.
+//
+
+import UIKit
+
+// 打印log， 格式: [时间(精确到毫秒)][文件名(类名) 方法名]: 自定义
+func EGLog<T>(_ log: T?, fileName: String = #file, methodName: String = #function, lineNumber: Int = #line) {
+    
+    let className = (fileName as NSString).lastPathComponent.replacingOccurrences(of: ".swift", with: "", options: String.CompareOptions.backwards, range: nil)
+    
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+    let dateString = formatter.string(from: Date())
+    
+    #if DEBUG
+        if let logMessage = log
+        {
+            print("\n[\(dateString)] [\(className) \(methodName)]: \n\(logMessage)")
+        }
+        else
+        {
+            print("\n[\(dateString)] [\(className) \(methodName)]: \n\(String(describing: log))")
+        }
+    #endif
+}
+
+
+
+/******************************  apoplexy API文档 *********************************/
+
+//获取服务器时间
+let serviceTime_URL = "/apoplexy/getCurrentTime"
+//查询订单
+let findApoplexy_URL = "/apoplexy/findApoplexy"
+//通过id获取急救详细信息
+let getApoplexyResultById_URL = "/apoplexy/getApoplexyResultById"
+//结束订单
+let finishApoplexy_URL = "/apoplexy/finishApoplexy"
+//上传急救图片
+let addApoplexyImg_URL = "/apoplexy/addApoplexyImg"
+//删除急救图片
+let delApoplexyImg_URL = "/apoplexy/delApoplexyImg"
+//添加fasted
+let addFASTED_URL = "/apoplexy/addFASTED"
+//添加NISSH评分
+let addNIHISS_URL = "/apoplexy/addNIHISS"
+//神经介入修改
+let intervenReceiveUpdate_URL = "/apoplexy/intervenReceiveUpdate"
+//急诊研究生急诊一线更新
+let postgraduateUpdate_URL = "/apoplexy/postgraduateUpdate"
+//急诊二线
+let secondLineUpdate_URL = "/apoplexy/secondLineUpdate"
+//发送推送
+let sendApoplexyPush_URL = "/apoplexy/sendApoplexyPush"
+//更改时间
+let updateApoplexyTime_URL = "/apoplexy/updateApoplexyTime"
+//新增患者信息
+let addPatient_URL = "/patient/addPatient"
+//修改患者信息
+let updatePatient_URL = "/patient/updatePatient"
+//安装设备installationId到服务中
+let installDeviceChat_URL = "/doctor/installDeviceChat"
+//通过医生角色获取医生信息
+let getPhoneNumber_URL = "/doctor/getPhoneNumber"
+
+
+/*******************************   doctor API文档 ********************************/
+
+//开启关闭通知接口
+let doctorSwitchPush_URL = "/doctor/switchDoctor"
+
+
+
+
+
+
+
+
