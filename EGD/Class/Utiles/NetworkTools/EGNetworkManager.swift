@@ -10,6 +10,17 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+
+/*  swift 3.0
+ * public：可以访问自己模块中任何 public，被 import 到其他模块，也可以被访问
+ * public:这个元素可以在其他作用域被访问 ,这个元素可以在其他作用域被继承或者override
+ * internal：只能访问自己模块中任何 internal 实体，不能访问其他模块中的 internal 实体
+ * 现在的 : ->private则是真正的私有，离开了这个类或者结构体的作用域外面就无法访问 == swift 3.0
+ * 过去的 ：->private：顾名思义，就是私有，只能在当前源文件中使用。
+ * fileprivate来显式的表明，这个元素的访问权限为文件内私有,过去的private对应现在的fileprivate
+ * open :
+ */
+
 // 网络请求的类型
 enum HTTPRequestMethod : String {
     case GET        = "GET"
