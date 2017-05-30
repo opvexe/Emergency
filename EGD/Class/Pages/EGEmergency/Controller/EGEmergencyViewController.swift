@@ -28,7 +28,7 @@ class EGEmergencyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         addTopCyclePic()              //添加轮播图测试数据
         view.addSubview(homeTableView)
         
@@ -90,9 +90,11 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
 }
 
 extension EGEmergencyViewController : clickCycleImageDelegate{
-    
-    func didCycleImageIndexPth(indexpath:IndexPath){
-        EGLog("点击了第几张图片\(indexpath)")
+    func didCycleImageIndexPth(picModel:EGBaseModel){
+        EGLog("点击了第几张图片\(String(describing: picModel.picUrl))")
+        let circleController = EGCircleController()
+        circleController.picURL =  picModel.picUrl
+        self.navigationController?.pushViewController(circleController, animated: true)
     }
 }
 

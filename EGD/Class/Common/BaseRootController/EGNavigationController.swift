@@ -36,7 +36,7 @@ class EGNavigationController: UINavigationController {
     func setBackBarButtonItem() -> UIBarButtonItem {
         
         let backButton = UIButton.init(type: .custom)
-        backButton.setImage(UIImage(named: "setting_back"), for: .normal)
+        backButton.setImage(UIImage(named: "leftbackicon_white_titlebar_24x24_"), for: .normal)
         backButton.sizeToFit()
         backButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 0)
         backButton.addTarget(self, action: #selector(EGNavigationController.backClick), for: .touchUpInside)

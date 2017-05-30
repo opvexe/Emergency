@@ -10,7 +10,7 @@ import UIKit
 
 class EGTools: NSObject {
 //判断手机号码格式
-    static  func isTelNumber(num:String)->Bool{
+    public  func isTelNumber(num:String)->Bool{
         let mobile = "^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$"
         let  CM = "^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$"
         let  CU = "^1(3[0-2]|5[256]|8[56])\\d{8}$"
@@ -31,9 +31,4 @@ class EGTools: NSObject {
             return false
         }
     }
-    
-    //
-    
-    
-    
 }

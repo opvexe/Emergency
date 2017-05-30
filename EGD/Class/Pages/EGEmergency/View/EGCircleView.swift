@@ -10,7 +10,7 @@ import UIKit
 
 protocol clickCycleImageDelegate {
     
-    func didCycleImageIndexPth(indexpath:IndexPath)
+    func didCycleImageIndexPth(picModel:EGBaseModel)
 }
 
 private let  EGCircleCellID = "EGCircleCell"
@@ -84,13 +84,13 @@ extension EGCircleView: UICollectionViewDelegate, UICollectionViewDataSource{
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EGCircleCellID, for: indexPath) as! EGCircleCollectionViewCell
         cell.model = dataArray?[indexPath.row % (dataArray?.count)!]
         
-        print("\([indexPath.row % (dataArray?.count)!])")
+        print("\(indexPath.row % (dataArray?.count)!)")
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        delegate?.didCycleImageIndexPth(indexpath: indexPath)
+    
+        delegate?.didCycleImageIndexPth(picModel:(dataArray?[indexPath.row % (dataArray?.count)!])!)
     }
     
     

@@ -36,6 +36,7 @@
 		5C7C5F8F1EDB167100FBD701 /* EGTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F8E1EDB167100FBD701 /* EGTools.swift */; };
 		5C7C5F911EDB23F400FBD701 /* EGCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F901EDB23F400FBD701 /* EGCircleView.swift */; };
 		5C7C5F931EDB299900FBD701 /* EGCircleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F921EDB299900FBD701 /* EGCircleCollectionViewCell.swift */; };
+		5CA446F81EDD9BF700F4B3FE /* EGCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA446F71EDD9BF700F4B3FE /* EGCircleController.swift */; };
 		5CD1DE7A1EDC3DB700F87275 /* EGHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE791EDC3DB700F87275 /* EGHomeTableViewCell.swift */; };
 		5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE7B1EDC42D300F87275 /* EGLivingShowViewController.swift */; };
 		5CD1DE7F1EDC466B00F87275 /* EGEmergencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE7E1EDC466B00F87275 /* EGEmergencyModel.swift */; };
@@ -69,7 +70,7 @@
 		5C7C5F2E1ED9DC3C00FBD701 /* EGDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGDTests.swift; sourceTree = "<group>"; };
 		5C7C5F301ED9DC3C00FBD701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5C7C5F421ED9DC4700FBD701 /* EGBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGBaseModel.swift; path = ../../Pages/EGEmergency/Model/EGBaseModel.swift; sourceTree = "<group>"; };
-		5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGPhotoPreviewer.swift; sourceTree = "<group>"; };
+		5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGPhotoPreviewer.swift; path = ../../View/EGPhotoPreviewer.swift; sourceTree = "<group>"; };
 		5C7C5F4C1ED9DC4700FBD701 /* EGMineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGMineViewController.swift; sourceTree = "<group>"; };
 		5C7C5F4F1ED9DC4700FBD701 /* EGSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGSettingTableViewCell.swift; sourceTree = "<group>"; };
 		5C7C5F511ED9DC4700FBD701 /* EGSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGSettingViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		5C7C5F8E1EDB167100FBD701 /* EGTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGTools.swift; sourceTree = "<group>"; };
 		5C7C5F901EDB23F400FBD701 /* EGCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCircleView.swift; sourceTree = "<group>"; };
 		5C7C5F921EDB299900FBD701 /* EGCircleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCircleCollectionViewCell.swift; sourceTree = "<group>"; };
+		5CA446F71EDD9BF700F4B3FE /* EGCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCircleController.swift; sourceTree = "<group>"; };
 		5CD1DE791EDC3DB700F87275 /* EGHomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGHomeTableViewCell.swift; sourceTree = "<group>"; };
 		5CD1DE7B1EDC42D300F87275 /* EGLivingShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGLivingShowViewController.swift; sourceTree = "<group>"; };
 		5CD1DE7E1EDC466B00F87275 /* EGEmergencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGEmergencyModel.swift; sourceTree = "<group>"; };
@@ -199,10 +201,11 @@
 		5C7C5F3F1ED9DC4700FBD701 /* EGEmergency */ = {
 			isa = PBXGroup;
 			children = (
-				5CD1DE781EDC3DA700F87275 /* Cell */,
+				5CA446F41EDD9A9600F4B3FE /* EGCircleController */,
 				5C7C5F401ED9DC4700FBD701 /* Controller */,
 				5C7C5F411ED9DC4700FBD701 /* Model */,
 				5C7C5F431ED9DC4700FBD701 /* View */,
+				5CD1DE781EDC3DA700F87275 /* Cell */,
 			);
 			path = EGEmergency;
 			sourceTree = "<group>";
@@ -226,7 +229,6 @@
 		5C7C5F431ED9DC4700FBD701 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */,
 				5C7C5F901EDB23F400FBD701 /* EGCircleView.swift */,
 				5C7C5F921EDB299900FBD701 /* EGCircleCollectionViewCell.swift */,
 				5CD1DE801EDC4DCD00F87275 /* EGStatusView.swift */,
@@ -421,6 +423,31 @@
 				5C7C5F8E1EDB167100FBD701 /* EGTools.swift */,
 			);
 			path = Tools;
+			sourceTree = "<group>";
+		};
+		5CA446F41EDD9A9600F4B3FE /* EGCircleController */ = {
+			isa = PBXGroup;
+			children = (
+				5CA446F51EDD9BC100F4B3FE /* Controller */,
+				5CA446F61EDD9BD400F4B3FE /* View */,
+			);
+			path = EGCircleController;
+			sourceTree = "<group>";
+		};
+		5CA446F51EDD9BC100F4B3FE /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5CA446F71EDD9BF700F4B3FE /* EGCircleController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		5CA446F61EDD9BD400F4B3FE /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		5CD1DE781EDC3DA700F87275 /* Cell */ = {
@@ -688,6 +715,7 @@
 				5C7C5F711ED9DC4800FBD701 /* EGMineTopView.swift in Sources */,
 				5C7C5F8F1EDB167100FBD701 /* EGTools.swift in Sources */,
 				5C7C5F771ED9DC4800FBD701 /* EG_API_HOSTDefine.swift in Sources */,
+				5CA446F81EDD9BF700F4B3FE /* EGCircleController.swift in Sources */,
 				5C7C5F741ED9DC4800FBD701 /* EGUIBarButtonItem_Extension.swift in Sources */,
 				5C7C5F831ED9DE9D00FBD701 /* EGTabBarController.swift in Sources */,
 				5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */,

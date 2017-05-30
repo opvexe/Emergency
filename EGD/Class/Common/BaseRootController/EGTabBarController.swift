@@ -48,5 +48,4 @@ class EGTabBarController: UITabBarController ,UITabBarControllerDelegate{
         addChildViewController(naviController)
         
     }
-    
 }

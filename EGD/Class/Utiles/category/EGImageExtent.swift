@@ -10,7 +10,7 @@ import UIKit
 
 //颜色转换成图片
 extension UIImage {
-   static func getImageWithColor(color:UIColor)->UIImage{
+   public func getImageWithColor(color:UIColor)->UIImage{
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()

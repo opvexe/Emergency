@@ -11,8 +11,6 @@ import Photos
 
 class EGPhotoPreviewer: UIView,UIScrollViewDelegate {
 
-
-    
     var blurBackground: UIVisualEffectView?  // 模糊背景
     var scrollView: UIScrollView?            // UIScrollView
     var containerView: UIView?               // 存放 imageView 容器
@@ -199,5 +197,4 @@ class EGPhotoPreviewer: UIView,UIScrollViewDelegate {
             vc?.present(alertController, animated: true, completion: nil)
         }
     }
-    
 }
