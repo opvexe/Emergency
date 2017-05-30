@@ -47,13 +47,11 @@ class EGNetworkResult: NSObject {
 }
 
 //设置请求头
- extension EGNetworkManager {
+extension EGNetworkManager {
     
     fileprivate func httpReqeustHeaders() ->[String: String] {
         
         var  headers:[String: String]?
-        
-        
         
         return headers!
     }
@@ -90,8 +88,8 @@ class EGNetworkManager: NSObject {
     }()
 }
 
-// 网络请求设置
- extension EGNetworkManager {
+// 网络请求设置 无依赖关系
+extension EGNetworkManager {
     /**
      发送一个 Post 请求
      */
@@ -106,7 +104,7 @@ class EGNetworkManager: NSObject {
     /**
      发送一个 GET 请求
      */
-   open class func getReqeust(_ path : String,params : [String : Any]?, success : successBlock?,failure : failureBlock?) {
+    open class func getReqeust(_ path : String,params : [String : Any]?, success : successBlock?,failure : failureBlock?) {
         
         
         let option          = self.shared.publicReqeust(.GET, path: path, params: params, success: success, failure: failure);
@@ -114,8 +112,7 @@ class EGNetworkManager: NSObject {
         option.start()
         
     }
-    
-    
+
     /**
      公共的请求方法 返回一个 NSOperation
      */
@@ -125,26 +122,111 @@ class EGNetworkManager: NSObject {
             self?.initNetworkOpeation(reqeustMethod.rawValue, path: path, params: params, success: success, failure: failure)
         }
         return operation
+    }
+
+}
+
+// 网络请求设置 有依赖关系
+extension EGNetworkManager {
+    
+    /**
+     GET 请求可以设置请求之间的依赖关系
+     */
+    open class func getOperationReqeust(_ path : String,params : [String : Any]?, success : successBlock?,failure : failureBlock?) {
         
+        self.publicReqeustOperation(.GET, path: path, params: params, success: success, failure: failure)
+        
+    }
+    
+    /**
+     POST请求方法 每个请求之间设置依赖关系
+     */
+    open class func postOperationReqeust(_ path : String,params : [String : Any]?, success : successBlock?,failure : failureBlock?) {
+        
+        self.publicReqeustOperation(.POST, path: path, params: params, success: success, failure: failure)
+        
+        
+    }
+    
+    /************************  // 公共的线程同步执行网络请求任务 **************************/
+    
+    private class  func publicReqeustOperation(_ reqeustMethod : HTTPRequestMethod ,path : String,params : [String : Any]?, success : successBlock?,  failure : failureBlock?) {
+        
+        let bkManager                       = self.shared;
+        
+        bkManager.networkLock.lock()
+        
+        let operation : BlockOperation      = bkManager.publicReqeust(reqeustMethod, path: path, params: params, success: success, failure: failure)
+        
+        operation.completionBlock           = {[weak bkManager] () in
+            bkManager!.bufferOperation.remove(operation)
+        }
+        
+        if let lastOperation = bkManager.bufferOperation.lastObject as? BlockOperation {
+            operation.addDependency(lastOperation)
+        }
+        
+        bkManager.operationQueue.addOperation(operation)
+        bkManager.bufferOperation.add(operation)
+        bkManager.networkLock.unlock()
     }
 }
 
-//实例化一个网络请求的任务Operation对象
 extension EGNetworkManager {
     
-   fileprivate func initNetworkOpeation(_ reqeustMethod : String ,path : String,params : [String : Any]?, success : successBlock?,  failure : failureBlock?) {
-    
-    let headerDict = self.httpReqeustHeaders()
-    print("请求URL : \n \(JSON(path))")
-    if params != nil {
-        print("请求参数 : \n \(JSON(params!))")
+    /************************  //实例化一个网络请求的任务Operation对象  **************************/
+    fileprivate func initNetworkOpeation(_ reqeustMethod : String ,path : String,params : [String : Any]?, success : successBlock?,  failure : failureBlock?) {
+        
+        let headerDict = self.httpReqeustHeaders()
+        print("请求URL : \n \(JSON(path))")
+        if params != nil {
+            print("请求参数 : \n \(JSON(params!))")
+        }
+        let httpMethod = HTTPMethod(rawValue: reqeustMethod)
+        var encodingType =  URLEncoding.default as ParameterEncoding
+        if reqeustMethod != "GET" {
+            encodingType = JSONEncoding.default as ParameterEncoding
+        }
+        // 设置超时时间
+        SessionManager.default.session.configuration.timeoutIntervalForRequest = RequestTimeoutInterval
+        let dataTask = Alamofire.request(path, method: httpMethod!, parameters: params, encoding: encodingType, headers: headerDict).responseJSON(completionHandler: { (response) in
+            
+            let responseResult : EGNetworkResult = EGNetworkResult()
+            responseResult.statusCode            = response.response?.statusCode ?? 0
+            
+            if response.result.isSuccess {
+                if success != nil {
+                    guard response.result.value != nil else {
+                        responseResult.value = [String : JSON]()
+                        success!(responseResult)
+                        return
+                    }
+                }
+            } else {
+                if failure != nil {
+                    guard response.result.error != nil else {
+                        responseResult.error = NSError(domain: "未知错误", code: 505, userInfo: nil)
+                        failure?(responseResult)
+                        return
+                    }
+                    responseResult.error = (response.result.error as NSError?)!
+                    OperationQueue.main.addOperation({
+                        print(responseResult.errorMsg)
+                        failure?(responseResult)
+                    })
+                }
+            }
+        })
+        // 缓存网络请求的Task
+        self.bufferDataTasks.append(dataTask)
     }
-    let httpMethod = HTTPMethod(rawValue: reqeustMethod)
-    var encodingType =  URLEncoding.default as ParameterEncoding
-    if reqeustMethod != "GET" {
-        encodingType = JSONEncoding.default as ParameterEncoding
+    // 取消所有网络请求
+    open class func cancelAllTasks() {
+        for task in self.shared.bufferDataTasks {
+            task.cancel()
+        }
+        EGNetworkManager.shared.bufferDataTasks.removeAll()
+        EGNetworkManager.shared.operationQueue.cancelAllOperations()
     }
-     // 设置超时时间
- }
 }
 
