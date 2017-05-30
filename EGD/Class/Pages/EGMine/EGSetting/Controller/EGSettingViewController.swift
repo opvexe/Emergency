@@ -30,7 +30,7 @@ class EGSettingViewController: UIViewController,UITableViewDelegate,UITableViewD
     //获取不同的Cell
     fileprivate func configCellFromDateSource() {
         let dataArray = [["leftTitle":"推送通知开关","isHiddenSwitch":"1"],
-                         ["leftTitle":"修改密码","iconRightImage":"home_more","className":""],
+                         ["leftTitle":"修改密码","iconRightImage":"comment_arrow_icon_12x12_","className":""],
                          ["leftTitle":"系统更新","rightTitle":"当前版本号 : " + infoDictionary]]
         setCellArray = EGSettingModel.mj_objectArray(withKeyValuesArray: dataArray)
         
@@ -46,6 +46,7 @@ class EGSettingViewController: UIViewController,UITableViewDelegate,UITableViewD
         tableView.backgroundColor = UIColor.themeTbaleviewGrayColors()
         //tableView.separatorStyle = UITableViewCellSeparatorStyle.none  //隐藏线条
         tableView.rowHeight = 44*ScreenScale
+        tableView.tableFooterView = UIView.init()
         view.addSubview(tableView)
        
     }

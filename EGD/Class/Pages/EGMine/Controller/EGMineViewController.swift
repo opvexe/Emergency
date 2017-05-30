@@ -29,7 +29,7 @@ class EGMineViewController: UIViewController,UITableViewDelegate,UITableViewData
         EGmineTableView.showsVerticalScrollIndicator = false
         EGmineTableView.showsHorizontalScrollIndicator = false
         EGmineTableView.backgroundColor = UIColor.themeTbaleviewGrayColors()
-        EGmineTableView.rowHeight = 60*ScreenScale
+        EGmineTableView.rowHeight = 44*ScreenScale
         let mineHeadView = EGMineTopView.init(frame: CGRect.init(x: 0, y: 0, width: kMainBoundsWidth, height: 210*ScreenScale))
         mineHeadView.delagate = self
         EGmineTableView.tableHeaderView = mineHeadView
@@ -69,7 +69,11 @@ extension EGMineViewController{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        
+        let model = EGDataArray[indexPath.row] as?EGSettingModel
+        let vc = EGTools().swiftClassFromString(className: (model?.className)!)
+        if (vc != nil) {
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
     }
 }
 

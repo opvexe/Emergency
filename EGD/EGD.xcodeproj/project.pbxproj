@@ -37,6 +37,7 @@
 		5C7C5F911EDB23F400FBD701 /* EGCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F901EDB23F400FBD701 /* EGCircleView.swift */; };
 		5C7C5F931EDB299900FBD701 /* EGCircleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F921EDB299900FBD701 /* EGCircleCollectionViewCell.swift */; };
 		5CA446F81EDD9BF700F4B3FE /* EGCircleController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA446F71EDD9BF700F4B3FE /* EGCircleController.swift */; };
+		5CA446FC1EDDB26F00F4B3FE /* EGRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CA446FB1EDDB26F00F4B3FE /* EGRouter.swift */; };
 		5CD1DE7A1EDC3DB700F87275 /* EGHomeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE791EDC3DB700F87275 /* EGHomeTableViewCell.swift */; };
 		5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE7B1EDC42D300F87275 /* EGLivingShowViewController.swift */; };
 		5CD1DE7F1EDC466B00F87275 /* EGEmergencyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE7E1EDC466B00F87275 /* EGEmergencyModel.swift */; };
@@ -94,6 +95,7 @@
 		5C7C5F901EDB23F400FBD701 /* EGCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCircleView.swift; sourceTree = "<group>"; };
 		5C7C5F921EDB299900FBD701 /* EGCircleCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCircleCollectionViewCell.swift; sourceTree = "<group>"; };
 		5CA446F71EDD9BF700F4B3FE /* EGCircleController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCircleController.swift; sourceTree = "<group>"; };
+		5CA446FB1EDDB26F00F4B3FE /* EGRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGRouter.swift; sourceTree = "<group>"; };
 		5CD1DE791EDC3DB700F87275 /* EGHomeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGHomeTableViewCell.swift; sourceTree = "<group>"; };
 		5CD1DE7B1EDC42D300F87275 /* EGLivingShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGLivingShowViewController.swift; sourceTree = "<group>"; };
 		5CD1DE7E1EDC466B00F87275 /* EGEmergencyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGEmergencyModel.swift; sourceTree = "<group>"; };
@@ -345,6 +347,8 @@
 		5C7C5F581ED9DC4700FBD701 /* Utiles */ = {
 			isa = PBXGroup;
 			children = (
+				5CA446FA1EDDB22C00F4B3FE /* Service */,
+				5CA446F91EDDB1FA00F4B3FE /* Cache */,
 				5CD1DE821EDC55C900F87275 /* NetworkTools */,
 				5C7C5F8D1EDB165F00FBD701 /* Tools */,
 				5C7C5F7E1ED9DE4800FBD701 /* View */,
@@ -448,6 +452,21 @@
 				5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5CA446F91EDDB1FA00F4B3FE /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		5CA446FA1EDDB22C00F4B3FE /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				5CA446FB1EDDB26F00F4B3FE /* EGRouter.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		5CD1DE781EDC3DA700F87275 /* Cell */ = {
@@ -721,6 +740,7 @@
 				5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */,
 				5C7C5F6A1ED9DC4700FBD701 /* EGBaseModel.swift in Sources */,
 				5CD1DE841EDC5A5C00F87275 /* EGNetworkManager.swift in Sources */,
+				5CA446FC1EDDB26F00F4B3FE /* EGRouter.swift in Sources */,
 				5C7C5F6E1ED9DC4800FBD701 /* EGSettingTableViewCell.swift in Sources */,
 				5CD1DE811EDC4DCD00F87275 /* EGStatusView.swift in Sources */,
 				5C7C5F881EDB119E00FBD701 /* EGVideoViewController.swift in Sources */,

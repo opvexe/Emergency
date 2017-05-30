@@ -9,7 +9,7 @@
 import UIKit
 
 class EGTools: NSObject {
-//判断手机号码格式
+    //判断手机号码格式
     public  func isTelNumber(num:String)->Bool{
         let mobile = "^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$"
         let  CM = "^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$"
@@ -31,4 +31,19 @@ class EGTools: NSObject {
             return false
         }
     }
+    //根据类名获取类
+   public func swiftClassFromString(className: String) -> UIViewController! {
+        if  let appName: String = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String? {
+            //拼接控制器名
+            let classStringName = "\(appName).\(className)"
+            //将控制名转换为类
+            let classType = NSClassFromString(classStringName) as? UIViewController.Type
+            if let type = classType {
+                let newVC = type.init()
+                return newVC
+            }
+        }
+        return nil;
+    }
+    
 }

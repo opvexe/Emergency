@@ -47,6 +47,10 @@ extension EGEmergencyViewController{
             modelArray.append(model)
         }
     }
+    
+    
+    
+    
 }
 
 extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource{
@@ -81,10 +85,9 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         return cell!
     }
     
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
         
     }
 }

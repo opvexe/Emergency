@@ -112,7 +112,7 @@ class EGSettingTableViewCell: UITableViewCell {
         
         
         self.leftLabel?.snp.makeConstraints({ (make) in
-            make.left.equalTo(self.leftIconImage!.snp.right).offset(15.0*ScreenScale)
+            make.left.equalTo(self.leftIconImage!.snp.right).offset(10.0*ScreenScale)
             make.top.equalTo(contentView).offset(15*ScreenScale)
             make.bottom.equalTo(self.contentView).offset(-15*ScreenScale)
             
@@ -126,7 +126,7 @@ class EGSettingTableViewCell: UITableViewCell {
         })
         
         self.rightIcon?.snp.makeConstraints({ (make) in
-            make.top.equalTo(self.contentView).offset(15.0*ScreenScale)
+            make.top.equalTo(self.contentView).offset(10.0*ScreenScale)
             make.right.equalTo(self.contentView).offset(-10.0*ScreenScale)
             make.width.equalTo(20.0*ScreenScale)
             make.bottom.equalTo(self.contentView).offset(-15*ScreenScale)
@@ -134,7 +134,7 @@ class EGSettingTableViewCell: UITableViewCell {
         
         
         self.rightLabel?.snp.makeConstraints({ (make) in
-            make.right.equalTo(self.contentView).offset(-15.0*ScreenScale)
+            make.right.equalTo(self.contentView).offset(-10.0*ScreenScale)
             make.top.equalTo(self.contentView).offset(15.0*ScreenScale)
             make.bottom.equalTo(self.contentView).offset(-15*ScreenScale)
         })
