@@ -86,6 +86,10 @@ class EGNetworkManager: NSObject {
         let lock = NSLock()
         return lock
     }()
+    //对象是否被销毁
+    deinit {
+        print("==EGNetworkManager==deinit")
+    }
 }
 
 // 网络请求设置 无依赖关系
@@ -229,4 +233,5 @@ extension EGNetworkManager {
         EGNetworkManager.shared.operationQueue.cancelAllOperations()
     }
 }
+
 
