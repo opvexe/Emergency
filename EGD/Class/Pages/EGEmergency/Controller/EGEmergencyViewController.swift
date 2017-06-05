@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MJExtension
 
 private let EGHomeCellID = "EGHomeCellID"
 
@@ -30,12 +31,11 @@ class EGEmergencyViewController: UIViewController {
         super.viewDidLoad()
         
         addTopCyclePic()              //添加轮播图测试数据
+        requstNetWork()
         view.addSubview(homeTableView)
         
+        
     }
-    
-    
-    
 }
 // ===添加测试数据====
 extension EGEmergencyViewController{
@@ -48,9 +48,15 @@ extension EGEmergencyViewController{
         }
     }
     
-    
-    
-    
+    func requstNetWork() {
+        
+        EGNetworkManager.getReqeust("http://api.daydaycook.com.cn/daydaycook/recommend/getMoreThemeRecipe.do?languageId=3&mainland=1&deviceId=D83DA445-62E2-46EF-A035-779FAE071FB2&uid=172096&regionCode=156&version=2.1.1",params: nil, success: { (sucess) in
+            
+            EGLog(sucess)
+        }) { (error) in
+            
+        }
+    }
 }
 
 extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource{
@@ -96,7 +102,7 @@ extension EGEmergencyViewController : clickCycleImageDelegate{
     func didCycleImageIndexPth(picModel:EGBaseModel){
         EGLog("点击了第几张图片\(String(describing: picModel.picUrl))")
         let circleController = EGCircleController()
-        circleController.picURL =  picModel.picUrl
+//        circleController.picURL =  picModel.picUrl
         self.navigationController?.pushViewController(circleController, animated: true)
     }
 }

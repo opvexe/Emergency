@@ -11,8 +11,5 @@ import UIKit
 class EGBaseModel: NSObject {
     
     var className : String?
-    
-    
-    
     var picUrl :String?
 }

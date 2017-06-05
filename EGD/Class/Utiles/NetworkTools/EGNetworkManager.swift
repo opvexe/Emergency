@@ -35,15 +35,15 @@ enum HTTPRequestMethod : String {
 }
 
 // 成功的回调
-typealias successBlock                          = (_ data  :EGNetworkResult) -> Void
+typealias successBlock                          = (_ data  :Any) -> Void
 
 // 失败的回调
-typealias failureBlock                          = (_ error :EGNetworkResult) -> Void
+typealias failureBlock                          = (_ error :Any) -> Void
 
 // 请求超时时间
 let RequestTimeoutInterval                      = 10.0
 
-// 网络请求结果处理
+//// 网络请求结果处理
 class EGNetworkResult: NSObject {
     
     var error : NSError = NSError(domain: "未知错误", code: 505, userInfo: nil) {
@@ -64,12 +64,14 @@ extension EGNetworkManager {
         
         var  headers:[String: String]?
         
+         headers = [:]
+        
         return headers!
     }
 }
 
 //网络请求参数设置
-class EGNetworkManager: NSObject {
+ class EGNetworkManager: NSObject {
     //单例 static 修饰不可修改
     static var shared : EGNetworkManager = {
         let manager = EGNetworkManager()
@@ -205,31 +207,11 @@ extension EGNetworkManager {
         // 设置超时时间
         SessionManager.default.session.configuration.timeoutIntervalForRequest = RequestTimeoutInterval
         let dataTask = Alamofire.request(path, method: httpMethod!, parameters: params, encoding: encodingType, headers: headerDict).responseJSON(completionHandler: { (response) in
-            
-            let responseResult : EGNetworkResult = EGNetworkResult()
-            responseResult.statusCode            = response.response?.statusCode ?? 0
-            
-            if response.result.isSuccess {
-                if success != nil {
-                    guard response.result.value != nil else {
-                        responseResult.value = [String : JSON]()
-                        success!(responseResult)
-                        return
-                    }
-                }
-            } else {
-                if failure != nil {
-                    guard response.result.error != nil else {
-                        responseResult.error = NSError(domain: "未知错误", code: 505, userInfo: nil)
-                        failure?(responseResult)
-                        return
-                    }
-                    responseResult.error = (response.result.error as NSError?)!
-                    OperationQueue.main.addOperation({
-                        print(responseResult.errorMsg)
-                        failure?(responseResult)
-                    })
-                }
+        
+            if response.response?.statusCode == 200 {
+                success!(response)
+            }else{
+                failure!("未知错误")
             }
         })
         // 缓存网络请求的Task

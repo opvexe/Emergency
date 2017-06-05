@@ -8,17 +8,33 @@
 
 import UIKit
 
-class EGEmergencyModel: EGSettingModel {
-
-    var userName :String?
-    var userAge :String?         //年龄
-    var userSex :String?        //性别
-    var userCharm :String?      //魅力
-    var userVip :String?        //Vip标识
-    var userWealth :String?     //财富
+class EGEmergencyModel: EGBaseModel {
     
-    var UserSignature :String? //签名
-    var onlineTime :String?     //在线时间
-    var  flirt :Bool?         //撩他
+    var click_count :Int?
+//    var description :String?
+    var favorite :Int?
+    var favorite_count :Int?
+    var group_id :String?
+    var image_url :String?
+    var locationId :String?
+    var locationName :String?
+    var makingTime :String?
+    var recipe_id :Int?
+    var recipe_type :Int?
+    var recommend_type :Int?
+    var share_count :Int?
+    var rid : Int?
+    var source :EGHomeModel?
 
+}
+
+class EGHomeModel: EGBaseModel{
+    
+    var authorImageUrl :String?
+    var authorName :String?
+    var authorSummary :String?
+    var displayAuthor :Int?
+    var authorId :Int?
+    var str_date :String?
+    var title :String?
 }

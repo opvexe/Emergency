@@ -22,7 +22,7 @@ class EGHomeTableViewCell: UITableViewCell {
         self.selectionStyle = UITableViewCellSelectionStyle.none
         
         
-        
+        showUI()
         
     }
     required init?(coder aDecoder: NSCoder) {
