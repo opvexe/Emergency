@@ -18,6 +18,8 @@ class EGMineTopView: UIView {
     var headButton = UIButton.init(type: UIButtonType.custom)
     var doctorLabel = UILabel.init()
     var hospitalLabel = UILabel.init()
+    var iconImageView = UIImageView.init()
+    
     var delagate : EClickHeadViewDelegate?
 
     
@@ -38,6 +40,12 @@ extension EGMineTopView {
     
     func addSubViewWithFrame(frame:CGRect)  {
         
+        iconImageView.frame = self.bounds
+        iconImageView.image = UIImage(named:"3")
+        iconImageView.clipsToBounds = true
+        iconImageView.contentMode = .scaleToFill
+        iconImageView.translatesAutoresizingMaskIntoConstraints = true
+        self.addSubview(iconImageView)
         
         headButton.backgroundColor = UIColor.red
         headButton.layer.masksToBounds = true

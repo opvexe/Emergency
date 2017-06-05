@@ -21,7 +21,6 @@ class EGMineViewController: UIViewController,UITableViewDelegate,UITableViewData
         getDataSourceArray()
     }
     
-    
     private func setupTableView() {
         EGmineTableView.frame = CGRect.init(x: 0, y: 0, width: kMainBoundsWidth, height: kMainBoundsHeight)
         EGmineTableView.delegate = self

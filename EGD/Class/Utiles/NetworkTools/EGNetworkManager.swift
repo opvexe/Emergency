@@ -35,28 +35,16 @@ enum HTTPRequestMethod : String {
 }
 
 // 成功的回调
-typealias successBlock                          = (_ data  :Any) -> Void
+typealias successBlock                          = (_ data  :JSON) -> Void
 
 // 失败的回调
-typealias failureBlock                          = (_ error :Any) -> Void
+typealias failureBlock                          = (_ error :AnyObject) -> Void
 
 // 请求超时时间
 let RequestTimeoutInterval                      = 10.0
 
-//// 网络请求结果处理
-class EGNetworkResult: NSObject {
-    
-    var error : NSError = NSError(domain: "未知错误", code: 505, userInfo: nil) {
-        didSet {
-            errorMsg = error.localizedDescription
-        }
-    }
-    var errorMsg : String           = "未知错误"
-    var value : [String : JSON]     = [String :JSON]()
-    var statusCode : Int = 200
-    var data : Any?
-}
-
+/// code 码 200 操作成功
+private let RETURN_OK = 200
 //设置请求头
 extension EGNetworkManager {
     
@@ -207,11 +195,20 @@ extension EGNetworkManager {
         // 设置超时时间
         SessionManager.default.session.configuration.timeoutIntervalForRequest = RequestTimeoutInterval
         let dataTask = Alamofire.request(path, method: httpMethod!, parameters: params, encoding: encodingType, headers: headerDict).responseJSON(completionHandler: { (response) in
-        
-            if response.response?.statusCode == 200 {
-                success!(response)
-            }else{
-                failure!("未知错误")
+  
+            guard response.result.isSuccess else {
+               print("加载失败")
+                failure!("加载失败" as AnyObject)
+                return
+            }
+            if let value = response.result.value {
+                let dict = JSON(value)
+                let code = dict["code"].intValue
+                guard code == RETURN_OK else {
+                    print("请求错误采参数")
+                    return
+                }
+                success!(dict)
             }
         })
         // 缓存网络请求的Task

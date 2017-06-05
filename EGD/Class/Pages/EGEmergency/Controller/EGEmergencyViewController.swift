@@ -8,9 +8,9 @@
 
 import UIKit
 import MJExtension
+import SwiftyJSON
 
 private let EGHomeCellID = "EGHomeCellID"
-
 class EGEmergencyViewController: UIViewController {
     
     fileprivate lazy var homeTableView : UITableView = {[unowned self] in
@@ -20,18 +20,19 @@ class EGEmergencyViewController: UIViewController {
         homeTableView.showsVerticalScrollIndicator = false
         homeTableView.showsHorizontalScrollIndicator = false
         homeTableView.backgroundColor = UIColor.themeTbaleviewGrayColors()
-        homeTableView.rowHeight = 60*ScreenScale
+        homeTableView.rowHeight = 80*ScreenScale
         homeTableView.tableFooterView = UIView.init()
         return homeTableView
         }()
     
     var modelArray : [EGBaseModel] = []
+    var pageCount = -2
+    var souceArray = NSMutableArray.init()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        addTopCyclePic()              //添加轮播图测试数据
-        requstNetWork()
+
+        requstDataSouce()
         view.addSubview(homeTableView)
         
         
@@ -39,22 +40,25 @@ class EGEmergencyViewController: UIViewController {
 }
 // ===添加测试数据====
 extension EGEmergencyViewController{
-    
-    func addTopCyclePic() {
-        for i in 1..<4 {
-            let model = EGBaseModel()
-            model.picUrl = "\(i)"
-            modelArray.append(model)
+    func requstDataSouce() {
+    let queue = OperationQueue()
+        queue.addOperation { () -> Void in
+            for i in 1..<4 {
+                let model = EGBaseModel()
+                model.picUrl = "\(i)"
+                self.modelArray.append(model)
+            }
         }
-    }
-    
-    func requstNetWork() {
-        
-        EGNetworkManager.getReqeust("http://api.daydaycook.com.cn/daydaycook/recommend/getMoreThemeRecipe.do?languageId=3&mainland=1&deviceId=D83DA445-62E2-46EF-A035-779FAE071FB2&uid=172096&regionCode=156&version=2.1.1",params: nil, success: { (sucess) in
-            
-            EGLog(sucess)
-        }) { (error) in
-            
+        queue.addOperation { () -> Void in
+            self.pageCount += 1
+            EGNetworkManager.getReqeust((EGRouter.accompanyWithYou.path),params: nil, success: { (sucess) in
+                if let data = sucess["data"].dictionary {
+                    self.souceArray = EGEmergencyModel.mj_objectArray(withKeyValuesArray: data["collections"]?.arrayObject)
+                }
+                self.homeTableView.reloadData()
+            }) { (error) in
+                EGLog(error)
+            }
         }
     }
 }
@@ -78,7 +82,7 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.souceArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,7 +91,7 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         if cell == nil {
             cell = EGHomeTableViewCell.init(style: .default, reuseIdentifier: EGHomeCellID)
         }
-        
+        cell?.modelSetting = self.souceArray[indexPath.row] as?EGEmergencyModel
         return cell!
     }
     
@@ -96,13 +100,14 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         
         
     }
+    
 }
 
 extension EGEmergencyViewController : clickCycleImageDelegate{
     func didCycleImageIndexPth(picModel:EGBaseModel){
         EGLog("点击了第几张图片\(String(describing: picModel.picUrl))")
         let circleController = EGCircleController()
-//        circleController.picURL =  picModel.picUrl
+        //        circleController.picURL =  picModel.picUrl
         self.navigationController?.pushViewController(circleController, animated: true)
     }
 }

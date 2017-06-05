@@ -45,7 +45,7 @@ class EGCircleController: UIViewController {
 //     
 //        let photoView = EGPhotoPreviewer()
 //        photoView.preview(fromImageView: imageShow!, container: self.view)
-      self.view.addSubview(circlrCollectionView)
+      view.addSubview(circlrCollectionView)
         
     }
    

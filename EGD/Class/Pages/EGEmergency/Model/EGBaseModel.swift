@@ -8,8 +8,18 @@
 
 import UIKit
 
+//自定义TableViewCellType
+enum TableViewCellType {
+    case TableViewCellTypeNone
+    case TableViewCellTypeImages
+    case TableViewCellTypeVisitor
+}
+
 class EGBaseModel: NSObject {
     
-    var className : String?
-    var picUrl :String?
+    var cellType : TableViewCellType?  //Cell的类型
+    
+    
+    var className : String?  //类名
+    var picUrl :String?    //轮播图
 }
