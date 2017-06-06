@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-protocol clickSwitchDelagate {
+protocol clickSwitchDelagate :NSObjectProtocol {
     
     func didDelegateAction(switchSender: UISwitch)
 }
@@ -21,7 +21,7 @@ class EGSettingTableViewCell: UITableViewCell {
     var rightIcon :UIImageView?
     var rightLabel :UILabel?
     var leftIconImage : UIImageView?
-    var delegate : clickSwitchDelagate?
+   weak var delegate : clickSwitchDelagate?
     
     
     var setting :EGSettingModel?{

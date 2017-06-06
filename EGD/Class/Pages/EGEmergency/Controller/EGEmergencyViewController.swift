@@ -31,17 +31,21 @@ class EGEmergencyViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         requstDataSouce()
         view.addSubview(homeTableView)
         
         
     }
+
+    deinit{
+        EGLog("deinit==")
+    }
 }
 // ===添加测试数据====
 extension EGEmergencyViewController{
     func requstDataSouce() {
-    let queue = OperationQueue()
+        let queue = OperationQueue()
         queue.addOperation { () -> Void in
             for i in 1..<4 {
                 let model = EGBaseModel()
@@ -52,7 +56,7 @@ extension EGEmergencyViewController{
         queue.addOperation { () -> Void in
             self.pageCount += 1
             
-           
+            
             var params = ["a": listType.list,"c": "data" ,"type": EGTopType.all] as [String : Any]
             if let maxtime = self.maxtime {
                 params["maxtime"] = maxtime
@@ -62,7 +66,7 @@ extension EGEmergencyViewController{
                 if var max = sucess["info"].dictionaryObject{
                     max["maxtime"]  = self.maxtime
                 }
-
+                
                 if let data = sucess["list"].arrayObject {
                     self.souceArray = EGEmergencyModel.mj_objectArray(withKeyValuesArray: data)
                 }
@@ -108,6 +112,13 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
             cell = EGHomeTableViewCell.init(style: .default, reuseIdentifier: EGHomeCellID)
         }
         cell?.modelSetting = self.souceArray[indexPath.row] as?EGEmergencyModel
+        cell?.delegate = self
+        
+        cell?.clickBlock = {[weak self](NSInteger)-> Void in  //[weak self] 类似于 __weak typeof(self)  防止循环引用
+            
+    
+            
+        }
         return cell!
     }
     
@@ -118,12 +129,25 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
     
 }
 
-extension EGEmergencyViewController : clickCycleImageDelegate{
+extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDelegate{
+    
     func didCycleImageIndexPth(picModel:EGBaseModel){
         EGLog("点击了第几张图片\(String(describing: picModel.picUrl))")
         let circleController = EGCircleController()
         //        circleController.picURL =  picModel.picUrl
         self.navigationController?.pushViewController(circleController, animated: true)
     }
+    
+    func clickButton(tag:NSInteger){
+//        switch tag-100 {
+//        case 0: break
+//        case 1: break
+//        case 2: break
+//        case 3: break
+//        default: break
+//        }
+    }
 }
+
+
 

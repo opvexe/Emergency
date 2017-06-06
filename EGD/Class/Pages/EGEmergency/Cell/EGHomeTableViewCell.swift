@@ -9,13 +9,20 @@
 import UIKit
 import SDWebImage
 
-private let EGwidth = kMainBoundsWidth/4
+// Swift中如何定义协议: 必须遵守NSObjectProtocol
+protocol clickTopButtonDelegate :NSObjectProtocol{
+    func clickButton(tag:NSInteger)
+}
+//闭包的使用
+typealias blockBtnClickSendValue = (_ tag:NSInteger)->Void
 
+private let EGwidth = (kMainBoundsWidth-20*ScreenScale)/4
 class EGHomeTableViewCell: UITableViewCell {
     private var profileImageView = UIImageView.init()
     private var screenNameLabel = UILabel.init()
     private var createTimeLabel = UILabel.init()
     private var contentLabel = UILabel.init()
+    private var moreButton = UIButton.init(type: .custom)
     private var bottomView = UIView.init()
     //底部按钮
     private var dingButton = EGUIButton_EGExtension.init(type: .custom)
@@ -25,6 +32,9 @@ class EGHomeTableViewCell: UITableViewCell {
     //视频/图片/
     private var videoPicView  = EGVideoPicView.init()
     private var UserStatusView :EGStatusView?   //状态
+    //定义一个属性保存代理,一定要加weak,避免循环引用
+    weak var delegate :clickTopButtonDelegate?
+    var clickBlock : blockBtnClickSendValue?
     
     var modelSetting :EGEmergencyModel?{
         
@@ -66,8 +76,6 @@ class EGHomeTableViewCell: UITableViewCell {
             // 评论
             setupButton(button: commentButton, number: model.comment ?? 0, placeholder: "评论")
             
-            
-            
         }
     }
     
@@ -86,7 +94,7 @@ class EGHomeTableViewCell: UITableViewCell {
         //发布内容
         setupMultiLineLabel(multiLabel: contentLabel, textColor: UIColor.themeBlackColors(), fontSize: 14*ScreenScale)
         //底部bottomView
-        bottomView.backgroundColor = UIColor.red
+        bottomView.backgroundColor = UIColor.themeTbaleviewGrayColors()
         // 顶
         dingButton.tag = 100
         dingButton.setTitleColor(UIColor.themeLightGrayColors(), for: .normal)
@@ -169,7 +177,7 @@ class EGHomeTableViewCell: UITableViewCell {
         }
         
         bottomView.snp.makeConstraints { (make) in
-            make.left.right.equalTo(contentView).offset(-10*ScreenScale)
+            make.left.right.equalTo(contentView).offset(0)
             make.top.equalTo(contentLabel.snp.bottom).offset(10*ScreenScale)
             make.height.equalTo(35*ScreenScale)
         }
@@ -206,9 +214,13 @@ class EGHomeTableViewCell: UITableViewCell {
     }
     
     //点击事件
-    func dothings() {
+    func dothings(sender:UIButton) {
+//        delegate?.clickButton(tag: sender.tag)  //代理方法
+        guard (clickBlock != nil) else {
+            return
+        }
+        clickBlock!(sender.tag)
         
-        EGLog("点击了")
     }
     
     //设置单行
