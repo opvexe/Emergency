@@ -57,7 +57,7 @@ extension EGEmergencyViewController{
             self.pageCount += 1
             
             
-            var params = ["a": listType.list,"c": "data" ,"type": EGTopType.all] as [String : Any]
+            var params = ["a": listType.list,"c": "data" ,"type": EGTopType.picture] as [String : Any]
             if let maxtime = self.maxtime {
                 params["maxtime"] = maxtime
             }
@@ -101,8 +101,12 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        return 200
+        return EGHomeTableViewCell.hyb_height(for: tableView, config: { (sourceCell) in
+            guard let cell = sourceCell as?EGHomeTableViewCell else {
+                return
+            }
+            cell.modelSetting = self.souceArray[indexPath.row] as?EGEmergencyModel
+        })
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

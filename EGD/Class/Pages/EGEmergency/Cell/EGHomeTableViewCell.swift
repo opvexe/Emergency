@@ -24,7 +24,9 @@ class EGHomeTableViewCell: UITableViewCell {
     private var contentLabel = UILabel.init()
     private var moreButton = UIButton.init(type: .custom)
     private var bottomView = UIView.init()
+    private var commentLabel = UILabel.init()
     //底部按钮
+    private var lineImageView = UIImageView.init() //线
     private var dingButton = EGUIButton_EGExtension.init(type: .custom)
     private var caiButton = EGUIButton_EGExtension.init(type: .custom)
     private var shareButton = EGUIButton_EGExtension.init(type: .custom)
@@ -32,6 +34,8 @@ class EGHomeTableViewCell: UITableViewCell {
     //视频/图片/
     private var videoPicView  = EGVideoPicView.init()
     private var UserStatusView :EGStatusView?   //状态
+    private var hotComment = UIView.init()
+    
     //定义一个属性保存代理,一定要加weak,避免循环引用
     weak var delegate :clickTopButtonDelegate?
     var clickBlock : blockBtnClickSendValue?
@@ -76,6 +80,34 @@ class EGHomeTableViewCell: UITableViewCell {
             // 评论
             setupButton(button: commentButton, number: model.comment ?? 0, placeholder: "评论")
             
+            //根据类型显示内容
+            guard model.type != 29  else {
+                return
+            }
+            videoPicView.topicModel = model
+            videoPicView.isHidden = false
+            videoPicView.snp.updateConstraints({ (make) in
+                make.height.equalTo(0)
+            })
+            
+            //热门评论
+            if model.top_cmt.count == 0 {
+                hotComment.isHidden = true
+            } else {
+                hotComment.isHidden = false
+                
+                let comment = model.top_cmt[0]
+                if comment.voiceuri.hasPrefix("http") {
+                    commentLabel.text = "\(comment.user.username ?? "") : [语音评论]"
+                } else {
+                    commentLabel.text = "\(comment.user.username ?? "") : \(comment.content!)"
+                }
+                hotComment.snp.updateConstraints({ (make) in
+                    make.height.equalTo(100*ScreenScale)
+                })
+            }
+            
+            setNeedsLayout()
         }
     }
     
@@ -88,13 +120,22 @@ class EGHomeTableViewCell: UITableViewCell {
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.cornerRadius = 20*ScreenScale
         //用户名
-         setupSingleLabel(styleLabel: screenNameLabel, textColor: UIColor.themeBlackColors(), fontSize: 14*ScreenScale)
+        setupSingleLabel(styleLabel: screenNameLabel, textColor: UIColor.themeBlackColors(), fontSize: 14*ScreenScale)
         //发布时间
         setupSingleLabel(styleLabel: createTimeLabel, textColor: UIColor.themeLightGrayColors(), fontSize: 12*ScreenScale)
+        //更多
+        moreButton.tag = 105
+        moreButton.setImage(UIImage(named: "cellmorebtnnormal"), for: .normal)
+        moreButton.setImage(UIImage(named: "cellmorebtnclick"), for: .highlighted)
+        moreButton.addTarget(self, action: #selector(dothings), for: .touchUpInside)
         //发布内容
         setupMultiLineLabel(multiLabel: contentLabel, textColor: UIColor.themeBlackColors(), fontSize: 14*ScreenScale)
         //底部bottomView
-        bottomView.backgroundColor = UIColor.themeTbaleviewGrayColors()
+        bottomView.backgroundColor = UIColor.yellow
+        //视频图片封面
+        videoPicView.backgroundColor = UIColor.red
+        //热门评论
+        hotComment.backgroundColor = UIColor.green
         // 顶
         dingButton.tag = 100
         dingButton.setTitleColor(UIColor.themeLightGrayColors(), for: .normal)
@@ -142,13 +183,21 @@ class EGHomeTableViewCell: UITableViewCell {
         contentView.addSubview(profileImageView)
         contentView.addSubview(screenNameLabel)
         contentView.addSubview(createTimeLabel)
+        contentView.addSubview(moreButton)
         contentView.addSubview(contentLabel)
         contentView.addSubview(bottomView)
+        contentView.addSubview(videoPicView)        //视频/图片/
+        contentView.addSubview(hotComment)          //热门评论
         
         bottomView.addSubview(dingButton)
         bottomView.addSubview(caiButton)
         bottomView.addSubview(shareButton)
         bottomView.addSubview(commentButton)
+        
+        
+        //最后一个视图
+        self.hyb_lastViewInCell = bottomView
+        self.hyb_bottomOffsetToCell = 0
         
         maginSize()
         
@@ -171,43 +220,61 @@ class EGHomeTableViewCell: UITableViewCell {
             make.top.equalTo(screenNameLabel.snp.bottom).offset(10*ScreenScale)
         }
         
+        moreButton.snp.makeConstraints { (make) in
+            make.right.equalTo(contentView).offset(-10*ScreenScale)
+            make.top.equalTo(contentView).offset(10*ScreenScale)
+            make.width.height.equalTo(30*ScreenScale)
+        }
+        
         contentLabel.snp.makeConstraints { (make) in
             make.top.equalTo(profileImageView.snp.bottom).offset(10*ScreenScale)
             make.left.right.equalTo(contentView).offset(0)
         }
         
+        videoPicView.snp.makeConstraints { (make) in
+            make.left.right.equalTo(contentView)
+            make.top.equalTo(contentLabel.snp.bottom).offset(10*ScreenScale)
+            make.height.equalTo(150*ScreenScale)
+        }
+        
+        hotComment.snp.makeConstraints { (make) in
+            make.left.right.equalTo(contentView)
+            make.top.equalTo(videoPicView.snp.bottom).offset(10*ScreenScale)
+            make.height.equalTo(0)
+        }
+        
         bottomView.snp.makeConstraints { (make) in
             make.left.right.equalTo(contentView).offset(0)
-            make.top.equalTo(contentLabel.snp.bottom).offset(10*ScreenScale)
+            make.top.equalTo(videoPicView.snp.bottom).offset(10*ScreenScale)
             make.height.equalTo(35*ScreenScale)
         }
-    
+        
         
         dingButton.snp.makeConstraints { (make) in
             make.left.equalTo(bottomView.snp.left).offset(0)
             make.top.equalTo(bottomView.snp.top).offset(10*ScreenScale)
-            make.bottom.equalTo(bottomView.snp.bottom).offset(10*ScreenScale)
+            make.bottom.equalTo(bottomView.snp.bottom).offset(-10*ScreenScale)
             make.width.equalTo(EGwidth)
         }
         
         caiButton.snp.makeConstraints { (make) in
             make.left.equalTo(dingButton.snp.right).offset(0)
             make.top.equalTo(bottomView.snp.top).offset(10*ScreenScale)
-            make.bottom.equalTo(bottomView.snp.bottom).offset(10*ScreenScale)
+            make.bottom.equalTo(bottomView.snp.bottom).offset(-10*ScreenScale)
             make.width.equalTo(EGwidth)
         }
         
         shareButton.snp.makeConstraints { (make) in
             make.left.equalTo(caiButton.snp.right).offset(0)
             make.top.equalTo(bottomView.snp.top).offset(10*ScreenScale)
-            make.bottom.equalTo(bottomView.snp.bottom).offset(10*ScreenScale)
+            make.bottom.equalTo(bottomView.snp.bottom).offset(-10*ScreenScale)
             make.width.equalTo(EGwidth)
         }
         
         commentButton.snp.makeConstraints { (make) in
             make.left.equalTo(shareButton.snp.right).offset(0)
             make.top.equalTo(bottomView.snp.top).offset(10*ScreenScale)
-            make.bottom.equalTo(bottomView.snp.bottom).offset(10*ScreenScale)
+            make.bottom.equalTo(bottomView.snp.bottom).offset(-10*ScreenScale)
             make.width.equalTo(EGwidth)
         }
         
@@ -215,7 +282,7 @@ class EGHomeTableViewCell: UITableViewCell {
     
     //点击事件
     func dothings(sender:UIButton) {
-//        delegate?.clickButton(tag: sender.tag)  //代理方法
+        //        delegate?.clickButton(tag: sender.tag)  //代理方法
         guard (clickBlock != nil) else {
             return
         }

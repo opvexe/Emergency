@@ -100,6 +100,9 @@ class EGEmergencyModel: EGBaseModel {
         }
         return "刚刚"
     }
+
+    
+    
     
 }
 
