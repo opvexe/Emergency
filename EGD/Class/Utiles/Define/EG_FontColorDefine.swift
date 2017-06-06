@@ -35,7 +35,7 @@ extension UIColor {
     
     //MARK: - 主体背景颜色
     static func themeMainColors() -> UIColor {
-        let themecolor = self.colorWithHex(0x009FE8)
+        let themecolor = self.colorWithHex(0x557b9a)
         return themecolor
     }
     

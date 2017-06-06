@@ -2,28 +2,44 @@ PODS:
   - Alamofire (4.4.0)
   - Kingfisher (3.9.1)
   - MJExtension (3.0.13)
+  - MJRefresh (3.1.12)
   - SDWebImage (4.0.0):
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SnapKit (3.2.0)
   - SwiftyJSON (3.1.4)
+  - UMengUShare/Core (6.4.4):
+    - UMengUShare/Network
+  - UMengUShare/Network (6.4.4)
+  - UMengUShare/Social/ReducedQQ (6.4.4):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedSina (6.4.4):
+    - UMengUShare/Core
+  - UMengUShare/Social/ReducedWeChat (6.4.4):
+    - UMengUShare/Core
 
 DEPENDENCIES:
   - Alamofire (~> 4.4)
   - Kingfisher (~> 3.9.1)
   - MJExtension (~> 3.0.13)
+  - MJRefresh (~> 3.1.12)
   - SDWebImage (~> 4.0.0)
   - SnapKit (~> 3.2.0)
   - SwiftyJSON (~> 3.1.1)
+  - UMengUShare/Social/ReducedQQ
+  - UMengUShare/Social/ReducedSina
+  - UMengUShare/Social/ReducedWeChat
 
 SPEC CHECKSUMS:
   Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
   Kingfisher: 6729a0baaa458245bfb8cd5a1296c71c10d6eb6c
   MJExtension: 5932755f451458eefa24239358817f8d291240c7
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SnapKit: 1ca44df72cfa543218d177cb8aab029d10d86ea7
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  UMengUShare: cd54ae52958426b79aa9193a7b02058d6a6d9aa0
 
-PODFILE CHECKSUM: ad5ab1bf41284fd01389bd5ddf467e1098efcb50
+PODFILE CHECKSUM: 4f5373626674c860382e881d1f5cc89f4e7f2e2c
 
 COCOAPODS: 1.2.1

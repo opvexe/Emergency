@@ -20,7 +20,6 @@ class EGEmergencyViewController: UIViewController {
         homeTableView.showsVerticalScrollIndicator = false
         homeTableView.showsHorizontalScrollIndicator = false
         homeTableView.backgroundColor = UIColor.themeTbaleviewGrayColors()
-        homeTableView.rowHeight = 80*ScreenScale
         homeTableView.tableFooterView = UIView.init()
         return homeTableView
         }()
@@ -28,6 +27,7 @@ class EGEmergencyViewController: UIViewController {
     var modelArray : [EGBaseModel] = []
     var pageCount = -2
     var souceArray = NSMutableArray.init()
+    var maxtime :String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +51,20 @@ extension EGEmergencyViewController{
         }
         queue.addOperation { () -> Void in
             self.pageCount += 1
-            EGNetworkManager.getReqeust((EGRouter.accompanyWithYou.path),params: nil, success: { (sucess) in
-                if let data = sucess["data"].dictionary {
-                    self.souceArray = EGEmergencyModel.mj_objectArray(withKeyValuesArray: data["collections"]?.arrayObject)
+            
+           
+            var params = ["a": listType.list,"c": "data" ,"type": EGTopType.all] as [String : Any]
+            if let maxtime = self.maxtime {
+                params["maxtime"] = maxtime
+            }
+            
+            EGNetworkManager.getReqeust((EGRouter.accompanyWithHomeYou.path),params: params, success: { (sucess) in
+                if var max = sucess["info"].dictionaryObject{
+                    max["maxtime"]  = self.maxtime
+                }
+
+                if let data = sucess["list"].arrayObject {
+                    self.souceArray = EGEmergencyModel.mj_objectArray(withKeyValuesArray: data)
                 }
                 self.homeTableView.reloadData()
             }) { (error) in
@@ -85,6 +96,11 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         return self.souceArray.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        return 200
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         var cell = tableView.dequeueReusableCell(withIdentifier:EGHomeCellID) as?EGHomeTableViewCell
@@ -97,7 +113,6 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
-        
         
     }
     

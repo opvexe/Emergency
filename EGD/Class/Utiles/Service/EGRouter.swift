@@ -11,17 +11,17 @@
 import UIKit
 
 enum EGRouter {
-    case accompanyWithYou       //陪你
+    case accompanyWithHomeYou       //陪你首页
     case videoDetail            //视频
     case livingShow             //直播
     
     var path :String{  //方法可以声明为mutating。这样就允许改变隐藏参数self的case值了。
         switch self {
-        case .accompanyWithYou:
-            return ServiceApi.getAccompany_API()
+        case .accompanyWithHomeYou:
+            return ServiceApi.getAccompanyHome_API()
             
         default:
-            return ServiceApi.getAccompany_API()
+            return ServiceApi.getAccompanyHome_API()
         }
     }
 

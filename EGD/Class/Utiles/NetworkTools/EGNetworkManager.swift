@@ -203,11 +203,12 @@ extension EGNetworkManager {
             }
             if let value = response.result.value {
                 let dict = JSON(value)
-                let code = dict["code"].intValue
-                guard code == RETURN_OK else {
-                    print("请求错误采参数")
-                    return
-                }
+//                let code = dict["code"].intValue
+//                guard code == RETURN_OK else {
+//                    print("请求错误采参数")
+//                    return
+//                }
+                EGLog("网络请求数据===:\(dict)")
                 success!(dict)
             }
         })

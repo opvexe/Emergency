@@ -59,8 +59,6 @@ let deviceModel = UIDevice.current.model //获取设备的型号 例如：iPhone
 let CurrentVersion = UIDevice.current.systemVersion.hashValue
 
 
-let CellHeight = 88*ScreenScale
-
 
 
 

@@ -49,7 +49,7 @@ extension EGMineTopView {
         
         headButton.backgroundColor = UIColor.red
         headButton.layer.masksToBounds = true
-        headButton.layer.cornerRadius = CellHeight/2
+        headButton.layer.cornerRadius = 88*ScreenScale/2
              headButton.addTarget(self, action: #selector(doThings),for: UIControlEvents.touchUpOutside)
         self.addSubview(headButton)
         

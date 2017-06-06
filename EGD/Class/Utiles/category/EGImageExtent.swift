@@ -10,7 +10,7 @@ import UIKit
 
  extension UIImage {
     //颜色转换成图片
-  open class func getImageWithColor(color:UIColor)->UIImage{
+  func getImageWithColor(color:UIColor)->UIImage{
         let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
         UIGraphicsBeginImageContext(rect.size)
         let context = UIGraphicsGetCurrentContext()
@@ -22,7 +22,7 @@ import UIKit
     }
     
     //高斯模糊
-  open class func originalImageBlur(originalImage:UIImage, blurAmount:NSNumber) -> UIImage {
+  func originalImageBlur(originalImage:UIImage, blurAmount:NSNumber) -> UIImage {
         
         let inputImage =  CIImage(image: originalImage)
         //使用高斯模糊滤镜
