@@ -20,7 +20,6 @@ import SwiftyJSON
  * fileprivate来显式的表明，这个元素的访问权限为文件内私有,过去的private对应现在的fileprivate
  * open :
  */
-
 // 网络请求的类型
 enum HTTPRequestMethod : String {
     case GET        = "GET"
@@ -45,6 +44,7 @@ let RequestTimeoutInterval                      = 10.0
 
 /// code 码 200 操作成功
 private let RETURN_OK = 200
+
 //设置请求头
 extension EGNetworkManager {
     
@@ -52,19 +52,20 @@ extension EGNetworkManager {
         
         var  headers:[String: String]?
         
-         headers = [:]
+        headers = ["User-Agent":"iPhone 6s Plus"]
         
         return headers!
     }
 }
 
 //网络请求参数设置
- class EGNetworkManager: NSObject {
+class EGNetworkManager: NSObject {
     //单例 static 修饰不可修改
     static var shared : EGNetworkManager = {
         let manager = EGNetworkManager()
         return manager;
     }()
+
     //设置队列最大并发数
     lazy var operationQueue : OperationQueue = {
         let queue                            = OperationQueue()
@@ -87,6 +88,7 @@ extension EGNetworkManager {
         let lock = NSLock()
         return lock
     }()
+
     //对象是否被销毁
     deinit {
         print("==EGNetworkManager==deinit")
@@ -117,7 +119,7 @@ extension EGNetworkManager {
         option.start()
         
     }
-
+    
     /**
      公共的请求方法 返回一个 NSOperation
      */
@@ -128,7 +130,7 @@ extension EGNetworkManager {
         }
         return operation
     }
-
+    
 }
 
 // 网络请求设置 有依赖关系
@@ -195,19 +197,19 @@ extension EGNetworkManager {
         // 设置超时时间
         SessionManager.default.session.configuration.timeoutIntervalForRequest = RequestTimeoutInterval
         let dataTask = Alamofire.request(path, method: httpMethod!, parameters: params, encoding: encodingType, headers: headerDict).responseJSON(completionHandler: { (response) in
-  
+            
             guard response.result.isSuccess else {
-               print("加载失败")
+                print("加载失败")
                 failure!("加载失败" as AnyObject)
                 return
             }
             if let value = response.result.value {
                 let dict = JSON(value)
-//                let code = dict["code"].intValue
-//                guard code == RETURN_OK else {
-//                    print("请求错误采参数")
-//                    return
-//                }
+                //                let code = dict["code"].intValue
+                //                guard code == RETURN_OK else {
+                //                    print("请求错误采参数")
+                //                    return
+                //                }
                 EGLog("网络请求数据===:\(dict)")
                 success!(dict)
             }

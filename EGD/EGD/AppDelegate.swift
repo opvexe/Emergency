@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
+    let NetworkAbilityManager = NetworkReachabilityManager(host: "www.baidu.com")
     var window: UIWindow?
 
 
@@ -21,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = EGTabBarController()
         window?.makeKeyAndVisible()
+        
+        NetworkAbilityManager?.startListening()   //网络监听状态开启
         return true
     }
 

@@ -20,6 +20,7 @@ class EGEmergencyViewController: UIViewController {
         homeTableView.showsVerticalScrollIndicator = false
         homeTableView.showsHorizontalScrollIndicator = false
         homeTableView.backgroundColor = UIColor.themeTbaleviewGrayColors()
+        homeTableView.separatorStyle = UITableViewCellSeparatorStyle.none //去掉cell上的分割线
         homeTableView.tableFooterView = UIView.init()
         return homeTableView
         }()
@@ -37,7 +38,7 @@ class EGEmergencyViewController: UIViewController {
         
         
     }
-
+    
     deinit{
         EGLog("deinit==")
     }
@@ -57,7 +58,7 @@ extension EGEmergencyViewController{
             self.pageCount += 1
             
             
-            var params = ["a": listType.list,"c": "data" ,"type": EGTopType.picture] as [String : Any]
+            var params = ["a": listType.newlist,"c": "data" ,"type": EGTopType.all] as [String : Any]
             if let maxtime = self.maxtime {
                 params["maxtime"] = maxtime
             }
@@ -101,7 +102,7 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return EGHomeTableViewCell.hyb_height(for: tableView, config: { (sourceCell) in
+        return   EGHomeTableViewCell.hyb_height(for: tableView, config: { (sourceCell) in
             guard let cell = sourceCell as?EGHomeTableViewCell else {
                 return
             }
@@ -117,10 +118,9 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         }
         cell?.modelSetting = self.souceArray[indexPath.row] as?EGEmergencyModel
         cell?.delegate = self
-        
-        cell?.clickBlock = {[weak self](NSInteger)-> Void in  //[weak self] 类似于 __weak typeof(self)  防止循环引用
+        cell?.clickBlock = {[weak self]()-> Void in  //[weak self] 类似于 __weak typeof(self)  防止循环引用
             
-    
+                    EGLog("点击了更多按钮")
             
         }
         return cell!
@@ -143,15 +143,21 @@ extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDele
     }
     
     func clickButton(tag:NSInteger){
-//        switch tag-100 {
-//        case 0: break
-//        case 1: break
-//        case 2: break
-//        case 3: break
-//        default: break
-//        }
+        
+       EGLog("点击了分享等按钮")
+        switch tag-100 {
+        case 0:
+            break
+        case 1:
+            break
+        case 2:
+            break
+        case 3:
+            break
+        default:
+            break
+        }
     }
 }
-
 
 

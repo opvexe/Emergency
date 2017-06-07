@@ -8,8 +8,8 @@
 
 import UIKit
 
+//重写 UIButton
 class EGUIButton_EGExtension: UIButton {
-
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -29,6 +29,34 @@ class EGUIButton_EGExtension: UIButton {
         self.titleLabel?.textAlignment = NSTextAlignment.center
         
     }
-
-
 }
+
+//添加实力方法
+extension UIButton{
+    //设置button
+    func setSharedButton(styleButton: UIButton,normalImageString: String ,selectedImageString:String ,fontSize:CGFloat) {
+        styleButton.setTitleColor(UIColor.themeLightGrayColors(), for: .normal)
+        styleButton.setTitleColor(UIColor.themeLightGrayColors(), for: .disabled)
+        styleButton.setTitleColor(UIColor.red, for: .highlighted)
+        styleButton.setTitleColor(UIColor.red, for: .selected)
+        styleButton.titleLabel?.font = UIFont.init(name: "PingFangSC-Light", size: fontSize)
+        styleButton.setImage(UIImage(named: normalImageString), for: .normal)
+        styleButton.setImage(UIImage(named: selectedImageString), for: .highlighted)
+    }
+    //设置Button
+     func setupButton(button: UIButton, number: NSNumber, placeholder: String) {
+        let count = number.intValue
+        if count > 10000 {
+            button.setTitle(String(format: "%.1f万", number.floatValue / 10000.0), for: .normal)
+        } else if count > 0 {
+            button.setTitle(String(format: "%zd", count), for: .normal)
+        } else {
+            button.setTitle(placeholder, for: .normal)
+        }
+    }
+    
+}
+
+
+
+

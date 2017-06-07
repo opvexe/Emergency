@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-protocol EClickHeadViewDelegate {
+protocol EClickHeadViewDelegate: NSObjectProtocol {
     func clickEGHeadAction(sender:UIButton)
 }
 
@@ -20,7 +20,7 @@ class EGMineTopView: UIView {
     var hospitalLabel = UILabel.init()
     var iconImageView = UIImageView.init()
     
-    var delagate : EClickHeadViewDelegate?
+   weak var delagate : EClickHeadViewDelegate?
 
     
     override init(frame: CGRect) {
