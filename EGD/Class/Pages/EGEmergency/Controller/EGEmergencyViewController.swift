@@ -79,8 +79,8 @@ extension EGEmergencyViewController{
     }
 }
 
-extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource{
-    
+extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource,EGActionSheetDelegate{
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         let cycleView = EGCircleView.init(frame: CGRect(x: 0, y: 64.0, width:kMainBoundsWidth , height:200*ScreenScale))
         cycleView.dataArray = modelArray
@@ -120,14 +120,28 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         cell?.delegate = self
         cell?.clickBlock = {[weak self]()-> Void in  //[weak self] 类似于 __weak typeof(self)  防止循环引用
             
-                    EGLog("点击了更多按钮")
+            let actionSheet = EGActionSheetView.init(title:"", itemTitles: ["拍摄","从手机相册选择"])
+            actionSheet.cancleTextColor = UIColor.black
+            actionSheet.titleTextFont = k15Font
+            actionSheet.itemTextFont = k18Font
+            actionSheet.titleTextColor = .red
+            actionSheet.itemTextColor = .black
             
+            actionSheet.tag = indexPath.row
+            actionSheet.delegate = self
+
         }
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+        
+    }
+    
+    func sheetViewDidSelect(index: Int, title: String, actionSheet: EGActionSheetView) {
+       
+        EGLog("点击:===\(index)")
         
     }
     

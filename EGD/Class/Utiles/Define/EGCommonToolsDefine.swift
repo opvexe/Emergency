@@ -30,7 +30,7 @@ func EGLog<T>(_ log: T?, fileName: String = #file, methodName: String = #functio
 }
 
 //AppDelegate
-let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+let KeyWindow : UIWindow = UIApplication.shared.keyWindow!
 
 //屏幕宽度，屏幕高度
 let kMainBoundsHeight = UIScreen.main.bounds.size.height //屏幕的高度

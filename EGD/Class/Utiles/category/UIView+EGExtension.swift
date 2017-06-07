@@ -128,6 +128,17 @@ extension UIView {
             self.center = mo_center
         }
     }
+  
+    public var bottomY: CGFloat{
+        get{
+            return self.mo_y + self.mo_height
+        }
+        set{
+            var r = self.frame
+            r.origin.y = newValue - frame.size.height
+            self.frame = r
+        }
+    }
     
     // 获取响应链上的UIViewController
     func currentViewController() -> UIViewController?{
