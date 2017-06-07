@@ -79,7 +79,7 @@ extension EGEmergencyViewController{
     }
 }
 
-extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource,EGActionSheetDelegate{
+extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource{
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
         let cycleView = EGCircleView.init(frame: CGRect(x: 0, y: 64.0, width:kMainBoundsWidth , height:200*ScreenScale))
@@ -119,14 +119,12 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         cell?.modelSetting = self.souceArray[indexPath.row] as?EGEmergencyModel
         cell?.delegate = self
         cell?.clickBlock = {[weak self]()-> Void in  //[weak self] 类似于 __weak typeof(self)  防止循环引用
-            
             let actionSheet = EGActionSheetView.init(title:"", itemTitles: ["拍摄","从手机相册选择"])
             actionSheet.cancleTextColor = UIColor.black
             actionSheet.titleTextFont = k15Font
             actionSheet.itemTextFont = k18Font
             actionSheet.titleTextColor = .red
             actionSheet.itemTextColor = .black
-            
             actionSheet.tag = indexPath.row
             actionSheet.delegate = self
 
@@ -139,26 +137,15 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         
     }
     
-    func sheetViewDidSelect(index: Int, title: String, actionSheet: EGActionSheetView) {
-       
-        EGLog("点击:===\(index)")
-        
-    }
-    
 }
 
-extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDelegate{
+extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDelegate,EGActionSheetDelegate{
     
     func didCycleImageIndexPth(picModel:EGBaseModel){
-        EGLog("点击了第几张图片\(String(describing: picModel.picUrl))")
-        let circleController = EGCircleController()
-        //        circleController.picURL =  picModel.picUrl
-        self.navigationController?.pushViewController(circleController, animated: true)
+     
     }
     
     func clickButton(tag:NSInteger){
-        
-       EGLog("点击了分享等按钮")
         switch tag-100 {
         case 0:
             break
@@ -172,6 +159,50 @@ extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDele
             break
         }
     }
+    
+    func sheetViewDidSelect(index: Int, title: String, actionSheet: EGActionSheetView) {
+        switch index {
+        case 0:
+            guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+                return EGLog("读取相机错误")
+            }
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.camera
+            imagePicker.allowsEditing = true                 //允许编辑
+            imagePicker.showsCameraControls = false     //是否显示控制栏（true 可自定义）
+            self.present(imagePicker, animated: true, completion: { () -> Void in
+            })
+            break
+        case 1:
+            guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary) else {
+                return EGLog("读取相册错误")
+            }
+            let picker = UIImagePickerController()
+            picker.delegate = self
+            picker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            self.present(picker, animated: true, completion: {
+                () -> Void in
+            })
+            break
+        default:
+            break
+        }
+    }
+
 }
+//相机代理行为
+extension EGEmergencyViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+    
+    private func imagePickerController(picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        EGLog("info:\(info)")
+//        let image = info[UIImagePickerControllerOriginalImage] as! UIImage  //获取选择的原图
 
-
+        self.dismiss(animated: true, completion: nil)
+    }
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+}
