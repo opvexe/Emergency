@@ -12,7 +12,6 @@ import SwiftyJSON
 
 private let EGHomeCellID = "EGHomeCellID"
 class EGEmergencyViewController: UIViewController {
-    
     fileprivate lazy var homeTableView : UITableView = {[unowned self] in
         let homeTableView = UITableView.init(frame: self.view.bounds, style:UITableViewStyle.plain)
         homeTableView.delegate = self
@@ -24,6 +23,21 @@ class EGEmergencyViewController: UIViewController {
         homeTableView.tableFooterView = UIView.init()
         return homeTableView
         }()
+    // MARK: 懒加载swift 都是以闭包的形式
+    private lazy var cycleView: EGCircleView = {
+        let cycleView = EGCircleView.init(frame: CGRect(x: 0, y: 64.0, width:kMainBoundsWidth , height:200*ScreenScale))
+        cycleView.delegate = self
+        return cycleView
+    }()
+    //MARK : 添加小控件 == 随便写了玩的
+    fileprivate lazy var footerBtn : UIButton = {
+        let footerBtn = UIButton.init(frame:CGRect(x:kMainBoundsWidth - 100, y:kMainBoundsHeight-200, width:60 , height:60))
+        footerBtn.layer.masksToBounds = true
+        footerBtn.layer.cornerRadius = 30
+        footerBtn.backgroundColor = UIColor.red
+        footerBtn.addTarget(self, action: #selector(upperTop), for: .touchUpInside)
+        return footerBtn
+    }()
     
     var modelArray : [EGBaseModel] = []
     var pageCount = -2
@@ -33,16 +47,18 @@ class EGEmergencyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        requstDataSouce()
+        requstDataSouce()  //网络请求
         view.addSubview(homeTableView)
-        
-        
+        cycleView.dataArray = modelArray
+        homeTableView.tableHeaderView = cycleView
+        view.addSubview(footerBtn)
     }
     
     deinit{
         EGLog("deinit==")
     }
 }
+
 // ===添加测试数据====
 extension EGEmergencyViewController{
     func requstDataSouce() {
@@ -57,8 +73,7 @@ extension EGEmergencyViewController{
         queue.addOperation { () -> Void in
             self.pageCount += 1
             
-            
-            var params = ["a": listType.newlist,"c": "data" ,"type": EGTopType.all] as [String : Any]
+            var params = ["a": listType.list,"c": "data" ,"type": EGTopType.all] as [String : Any]
             if let maxtime = self.maxtime {
                 params["maxtime"] = maxtime
             }
@@ -80,19 +95,6 @@ extension EGEmergencyViewController{
 }
 
 extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource{
-
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView?{
-        let cycleView = EGCircleView.init(frame: CGRect(x: 0, y: 64.0, width:kMainBoundsWidth , height:200*ScreenScale))
-        cycleView.dataArray = modelArray
-        cycleView.delegate = self
-        return cycleView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        
-        return 200*ScreenScale
-    }
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -102,7 +104,7 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return   EGHomeTableViewCell.hyb_height(for: tableView, config: { (sourceCell) in
+        return  EGHomeTableViewCell.hyb_height(for: tableView, config: { (sourceCell) in
             guard let cell = sourceCell as?EGHomeTableViewCell else {
                 return
             }
@@ -127,7 +129,7 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
             actionSheet.itemTextColor = .black
             actionSheet.tag = indexPath.row
             actionSheet.delegate = self
-
+            
         }
         return cell!
     }
@@ -136,30 +138,49 @@ extension EGEmergencyViewController : UITableViewDelegate, UITableViewDataSource
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
         
     }
-    
+
+    public func scrollViewWillBeginDragging(_ scrollView: UIScrollView){
+        footerBtn.isHidden = true
+    }
+    public func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        footerBtn.isHidden = true
+    }
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        footerBtn.isHidden = false
+    }
 }
 
 extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDelegate,EGActionSheetDelegate{
-    
-    func didCycleImageIndexPth(picModel:EGBaseModel){
-     
+    //MAKR :点击回到顶部
+    func upperTop() {
+        homeTableView.setContentOffset(CGPoint(x:0,y:0), animated: true) //方法1
+//        let indexPat = NSIndexPath.init(row: 0, section: 0)
+//        homeTableView.scrollToRow(at: indexPat as IndexPath, at: UITableViewScrollPosition.bottom, animated: true)  //方法2
     }
-    
+    //MARK :轮播图代理行为
+    func didCycleImageIndexPth(picModel:EGBaseModel){
+        
+    }
+    //MARK : 点击代理行为
     func clickButton(tag:NSInteger){
         switch tag-100 {
         case 0:
+            EGLog("点赞")
             break
         case 1:
+            EGLog("踩")
             break
         case 2:
+            EGLog("分享")
             break
         case 3:
+            EGLog("评论")
             break
         default:
             break
         }
     }
-    
+    //MARK :调用相机代理行为
     func sheetViewDidSelect(index: Int, title: String, actionSheet: EGActionSheetView) {
         switch index {
         case 0:
@@ -189,20 +210,18 @@ extension EGEmergencyViewController : clickCycleImageDelegate,clickTopButtonDele
             break
         }
     }
-
+    
 }
 //相机代理行为
 extension EGEmergencyViewController: UIImagePickerControllerDelegate,UINavigationControllerDelegate{
     
     private func imagePickerController(picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         EGLog("info:\(info)")
-//        let image = info[UIImagePickerControllerOriginalImage] as! UIImage  //获取选择的原图
-
+        //        let image = info[UIImagePickerControllerOriginalImage] as! UIImage  //获取选择的原图
+        
         self.dismiss(animated: true, completion: nil)
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController){
         self.dismiss(animated: true, completion: nil)
     }
-    
-    
 }

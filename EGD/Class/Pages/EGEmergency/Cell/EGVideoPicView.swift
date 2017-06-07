@@ -26,7 +26,7 @@ class EGVideoPicView: UIView {
             
             guard let model = videoModel else { return }
             gifImageView.isHidden = !model.is_gif.boolValue
-            self.loadImageBaseOnWifi(imageName: model.image1!, type: model.type)
+            self.loadImageBaseOnWifi(imageName: model.image0!, type: model.type)
 
             if model.type.intValue == 31 {           // 音频
              playVideoButton.isHidden = false

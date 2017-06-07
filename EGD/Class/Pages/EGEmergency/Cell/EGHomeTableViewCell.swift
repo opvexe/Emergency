@@ -146,7 +146,7 @@ class EGHomeTableViewCell: UITableViewCell {
         
         //最后一个视图
         self.hyb_lastViewInCell = bottomView
-        self.hyb_bottomOffsetToCell = 10*ScreenScale
+        self.hyb_bottomOffsetToCell = 20*ScreenScale
         
         maginSize()
         

@@ -14,7 +14,7 @@ class EGNavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         UINavigationBar.appearance().barTintColor = UIColor.themeMainColors() //背景颜色
+         UINavigationBar.appearance().barTintColor = UIColor.clear //背景颜色
         // 设置naviBar背景图片
 //        UINavigationBar.appearance().setBackgroundImage(UIImage.init(named: ""), for: UIBarMetrics.default)
         //MARK: 设置title的字体及字体颜色
