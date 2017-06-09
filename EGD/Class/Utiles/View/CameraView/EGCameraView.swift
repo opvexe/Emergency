@@ -8,17 +8,9 @@
 
 import UIKit
 import AVFoundation
-import AssetsLibrary
-import CoreMotion
 import SnapKit
 import Photos
 
-//闪光灯状态
-enum FlashStatus: Int {
-    case FlashOff
-    case FlashOn
-    case FlashDefault
-}
 protocol EGCameraViewDelegate: NSObjectProtocol {
     func takePhotoUseCameraAction(takePhotoFinishImage: UIImage)
 }
@@ -28,20 +20,19 @@ class EGCameraView: UIView{
     // MARK : AVCapture类
     fileprivate var device :AVCaptureDevice!
     fileprivate var session: AVCaptureSession = AVCaptureSession()
-    fileprivate var videoInput: AVCaptureInput?
+    fileprivate var videoInput: AVCaptureInput!
     fileprivate var stillImageOutput: AVCaptureStillImageOutput = AVCaptureStillImageOutput()
     fileprivate var previewLayer: AVCaptureVideoPreviewLayer!
     //MARK : UIButton
     fileprivate var takePhotoButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 56, height: 56))
-    fileprivate var cameraBackButton: UIButton = UIButton(frame: CGRect(x: 45, y: 0, width: 26, height: 26))
+    fileprivate var cameraBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 26))
     fileprivate var flashLightButton: UIButton = UIButton(frame: CGRect(x: 20, y: 20, width: 25, height: 25))
-    fileprivate var cameraSwitchButton: UIButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.size.width - 20 - 30, y: 0, width: 30, height: 30))
+    fileprivate var cameraSwitchButton: UIButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.size.width - 20 - 30, y: 20, width: 30, height: 30))
     //MARK : 聚焦View/默认缩放/最大缩放
     fileprivate var effectiveScale:CGFloat = 1.0
     fileprivate var beginGestureScale:CGFloat = 1.0
     fileprivate let maxScale:CGFloat = 2.0
     //MARK :CameraPositon/flashType/currentView
-    fileprivate var flashType_: FlashStatus!
     fileprivate var CameraPositon_: AVCaptureDevicePosition!
     //MARK :代理事件
     weak var delegate: EGCameraViewDelegate?
@@ -49,10 +40,10 @@ class EGCameraView: UIView{
     var clickBlock : EGClickCameraBlock?
     
     //初始化摄像头闪光灯状态/前后置摄像头
-    init(frame: CGRect, flashType: FlashStatus, CameraPositon :AVCaptureDevicePosition){
+    init(frame: CGRect, CameraPositon :AVCaptureDevicePosition){
         super.init(frame:frame)
         self.backgroundColor = UIColor.black
-        flashType_ = flashType
+        setUpUI()
         CameraPositon_ = CameraPositon
         setUpGesture() //添加手势
         installCameraDevice()  //初始化相机
@@ -104,11 +95,9 @@ extension EGCameraView {
         
         cameraBackButton.snp.updateConstraints { (make) in
             make.top.equalTo(takePhotoButton.snp.top)
+            make.left.equalTo(self).offset(45)
         }
-        
-        cameraSwitchButton.snp.updateConstraints { (make) in
-            make.top.equalTo(flashLightButton.snp.top)
-        }
+
     }
 }
 // MARK :点击事件
@@ -125,7 +114,7 @@ extension EGCameraView {
             swithFlash()
             break
         case 3:    //前置摄像头
-            frontBackCamera()
+            switchCamera()
             break
         default:
             break
@@ -162,17 +151,32 @@ extension EGCameraView {
     }
     
     @objc fileprivate func swithFlash(){    //闪光灯切换
+        //修改前必须先锁定
         do{ try device.lockForConfiguration() }catch{ }
-        if device.hasFlash == false { return }
-        if flashType_?.rawValue == 0 { device.flashMode = .off}
-        if flashType_?.rawValue == 1 { device.flashMode = .on}
-        if flashType_?.rawValue == 2 { device.flashMode = .auto}
+        if device.hasFlash == false { return  print("设备不支持闪光灯")}
+        if device.flashMode == AVCaptureFlashMode.off {
+            device.flashMode = AVCaptureFlashMode.on
+        }else if device.flashMode == AVCaptureFlashMode.on{
+            device.flashMode = AVCaptureFlashMode.auto
+        }else if device.flashMode == AVCaptureFlashMode.auto {
+            device.flashMode = AVCaptureFlashMode.off
+        }
         device.unlockForConfiguration()
     }
     
-    @objc fileprivate func frontBackCamera(){       //前置摄像头
-
-        
+    @objc fileprivate func switchCamera(){       //前置摄像头
+        if session.isRunning {
+            session.stopRunning()
+        }
+        if CameraPositon_ == AVCaptureDevicePosition.back {
+            CameraPositon_ = AVCaptureDevicePosition.front
+        }else {
+            CameraPositon_ = AVCaptureDevicePosition.back
+            installCameraDevice()
+        }
+        if session.isRunning == false {
+            session.startRunning()
+        }
     }
     
     @objc fileprivate func pin(_ recognizer:UIPinchGestureRecognizer) { //缩放
@@ -208,6 +212,14 @@ extension EGCameraView {
         }
         device.unlockForConfiguration()
     }
+    
+    @objc fileprivate func isCameraBack() ->Bool { //判断摄像头的方向
+        guard CameraPositon_ == AVCaptureDevicePosition.back else {
+               return false
+        }
+         return true
+    }
+    
 }
 
 //MARK :  初始化相机相关
@@ -215,31 +227,30 @@ extension EGCameraView {
     
    @objc fileprivate func installCameraDevice() {
         guard let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as? [AVCaptureDevice] else { return }
-        guard let d = devices.filter({ return $0.position == .back }).first else{ return}
-        device = d
-        guard let inputDevice = try? AVCaptureDeviceInput(device: d) else { return }
+ 
+        guard let dfilter = devices.filter({ return $0.position == CameraPositon_ }).first else{ return}
+        device = dfilter
+        guard let inputDevice = try? AVCaptureDeviceInput(device: dfilter) else { return }
         self.videoInput = inputDevice
-        
-        stillImageOutput = AVCaptureStillImageOutput()
+
+        session.sessionPreset = AVCaptureSessionPresetHigh
         stillImageOutput.outputSettings = [AVVideoCodecKey:AVVideoCodecJPEG]
-        
         if session.canAddInput(inputDevice) == true {
             session.addInput(self.videoInput)
         }
         if session.canAddOutput(stillImageOutput) == true {
             session.addOutput(stillImageOutput)
         }
-        
-        previewLayer = AVCaptureVideoPreviewLayer(session:session)
+    
+        previewLayer = AVCaptureVideoPreviewLayer.init(session: session)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        
-        do{ try d.lockForConfiguration() }catch{ }
-        if d.hasFlash == false { return }
-        d.flashMode = AVCaptureFlashMode.auto
-        d.unlockForConfiguration()
-
-        previewLayer!.frame = self.bounds
-        self.layer.insertSublayer(previewLayer!, at: 0)
+        previewLayer?.frame = self.bounds
+        self.layer.addSublayer(previewLayer)
+    //锁定设备之后才能修改设置,修改完再锁上 否则会崩溃
+        do{ try dfilter.lockForConfiguration() }catch{ }
+        if dfilter.hasFlash == false { return }
+        dfilter.flashMode = AVCaptureFlashMode.auto
+        dfilter.unlockForConfiguration()
     }
 }
 //MARK : 手势
@@ -259,39 +270,6 @@ extension EGCameraView: UIGestureRecognizerDelegate {
             beginGestureScale = self.effectiveScale
         }
         return true
-    }
-}
-
-extension EGCameraView {
-    
-    /** 相机权限检测 */
-    func cameraPermissions() -> Bool{
-        let authStatus:AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
-        
-        switch authStatus {
-        case .denied , .restricted:
-            return false
-        case .authorized:
-            return true
-        case .notDetermined:
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: nil)
-            return true
-        }
-    }
-    
-    /** 相册权限检测 */
-    func photoPermissions() -> Bool{
-        let authStatus:PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
-        switch authStatus {
-        case .denied , .restricted:
-            return false
-        case .authorized:
-            return true
-        case .notDetermined:
-            let vc = UIImagePickerController()
-            vc.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-            return true
-        }
     }
 }
 

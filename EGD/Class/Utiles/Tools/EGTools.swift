@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import Photos
 
 class EGTools: NSObject {
     //判断手机号码格式
@@ -44,6 +46,37 @@ class EGTools: NSObject {
             }
         }
         return nil;
+    }
+    
+    
+    /** 相机权限检测 */
+    func cameraPermissions() -> Bool{
+        let authStatus:AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        
+        switch authStatus {
+        case .denied , .restricted:
+            return false
+        case .authorized:
+            return true
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: nil)
+            return true
+        }
+    }
+    
+    /** 相册权限检测 */
+    func photoPermissions() -> Bool{
+        let authStatus:PHAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch authStatus {
+        case .denied , .restricted:
+            return false
+        case .authorized:
+            return true
+        case .notDetermined:
+            let vc = UIImagePickerController()
+            vc.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+            return true
+        }
     }
     
 }
