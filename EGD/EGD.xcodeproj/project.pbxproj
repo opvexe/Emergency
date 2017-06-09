@@ -14,6 +14,7 @@
 		5C3260A91EEA781A00DBE019 /* 1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C3260A81EEA781A00DBE019 /* 1.plist */; };
 		5C3260AC1EEA787400DBE019 /* EGVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */; };
 		5C3777441EEAD3C80016E54B /* EGShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3777431EEAD3C80016E54B /* EGShopModel.swift */; };
+		5C3777471EEB02CA0016E54B /* EGStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3777461EEB02CA0016E54B /* EGStatusViewController.swift */; };
 		5C471AE61EE683B800464C31 /* EGVideoPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AE51EE683B800464C31 /* EGVideoPicView.swift */; };
 		5C471AE81EE6884400464C31 /* EGDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AE71EE6884400464C31 /* EGDataExtension.swift */; };
 		5C471AEC1EE6973B00464C31 /* EGUIButton_EGExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AEB1EE6973B00464C31 /* EGUIButton_EGExtension.swift */; };
@@ -84,6 +85,7 @@
 		5C3260A81EEA781A00DBE019 /* 1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 1.plist; sourceTree = "<group>"; };
 		5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGVideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C3777431EEAD3C80016E54B /* EGShopModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGShopModel.swift; sourceTree = "<group>"; };
+		5C3777461EEB02CA0016E54B /* EGStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGStatusViewController.swift; sourceTree = "<group>"; };
 		5C471AE51EE683B800464C31 /* EGVideoPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGVideoPicView.swift; sourceTree = "<group>"; };
 		5C471AE71EE6884400464C31 /* EGDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGDataExtension.swift; sourceTree = "<group>"; };
 		5C471AEB1EE6973B00464C31 /* EGUIButton_EGExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGUIButton_EGExtension.swift; sourceTree = "<group>"; };
@@ -201,6 +203,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		5C3777451EEB02B70016E54B /* EGStatusController */ = {
+			isa = PBXGroup;
+			children = (
+				5C3777461EEB02CA0016E54B /* EGStatusViewController.swift */,
+			);
+			path = EGStatusController;
+			sourceTree = "<group>";
+		};
 		5C651A371EE6B129001366AE /* swiftBridge */ = {
 			isa = PBXGroup;
 			children = (
@@ -286,6 +296,7 @@
 		5C7C5F3E1ED9DC4700FBD701 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
+				5C3777451EEB02B70016E54B /* EGStatusController */,
 				5C7C5F451ED9DC4700FBD701 /* EGLoginRegister */,
 				5C7C5F3F1ED9DC4700FBD701 /* EGEmergency */,
 				5C7C5F861EDB117700FBD701 /* EGVideo */,
@@ -875,6 +886,7 @@
 				5C7C5F6E1ED9DC4800FBD701 /* EGSettingTableViewCell.swift in Sources */,
 				5CD1DE811EDC4DCD00F87275 /* EGStatusView.swift in Sources */,
 				5CA2BF151EE5A37D00FE1CAF /* UILabel_EGExtent.swift in Sources */,
+				5C3777471EEB02CA0016E54B /* EGStatusViewController.swift in Sources */,
 				5C651A481EE6C055001366AE /* UITableViewCell+HYBMasonryAutoCellHeight.m in Sources */,
 				5C7C5F881EDB119E00FBD701 /* EGVideoViewController.swift in Sources */,
 				5C7C5F731ED9DC4800FBD701 /* EGImageExtent.swift in Sources */,
