@@ -10,6 +10,10 @@
 		5C247E231EE7F92F00F31268 /* EGSheetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E221EE7F92F00F31268 /* EGSheetTableViewCell.swift */; };
 		5C247E251EE7FA6100F31268 /* EGSheetDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C247E241EE7FA6100F31268 /* EGSheetDefine.swift */; };
 		5C325F971EE9315500DBE019 /* EGCameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C325F961EE9315500DBE019 /* EGCameraView.swift */; };
+		5C3260A71EEA760900DBE019 /* EGWaterflowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3260A61EEA760900DBE019 /* EGWaterflowLayout.swift */; };
+		5C3260A91EEA781A00DBE019 /* 1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5C3260A81EEA781A00DBE019 /* 1.plist */; };
+		5C3260AC1EEA787400DBE019 /* EGVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */; };
+		5C3777441EEAD3C80016E54B /* EGShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3777431EEAD3C80016E54B /* EGShopModel.swift */; };
 		5C471AE61EE683B800464C31 /* EGVideoPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AE51EE683B800464C31 /* EGVideoPicView.swift */; };
 		5C471AE81EE6884400464C31 /* EGDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AE71EE6884400464C31 /* EGDataExtension.swift */; };
 		5C471AEC1EE6973B00464C31 /* EGUIButton_EGExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AEB1EE6973B00464C31 /* EGUIButton_EGExtension.swift */; };
@@ -76,6 +80,10 @@
 		5C247E221EE7F92F00F31268 /* EGSheetTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGSheetTableViewCell.swift; sourceTree = "<group>"; };
 		5C247E241EE7FA6100F31268 /* EGSheetDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGSheetDefine.swift; sourceTree = "<group>"; };
 		5C325F961EE9315500DBE019 /* EGCameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGCameraView.swift; sourceTree = "<group>"; };
+		5C3260A61EEA760900DBE019 /* EGWaterflowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGWaterflowLayout.swift; sourceTree = "<group>"; };
+		5C3260A81EEA781A00DBE019 /* 1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 1.plist; sourceTree = "<group>"; };
+		5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGVideoCollectionViewCell.swift; sourceTree = "<group>"; };
+		5C3777431EEAD3C80016E54B /* EGShopModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGShopModel.swift; sourceTree = "<group>"; };
 		5C471AE51EE683B800464C31 /* EGVideoPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGVideoPicView.swift; sourceTree = "<group>"; };
 		5C471AE71EE6884400464C31 /* EGDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGDataExtension.swift; sourceTree = "<group>"; };
 		5C471AEB1EE6973B00464C31 /* EGUIButton_EGExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGUIButton_EGExtension.swift; sourceTree = "<group>"; };
@@ -159,6 +167,38 @@
 				5C325F961EE9315500DBE019 /* EGCameraView.swift */,
 			);
 			path = CameraView;
+			sourceTree = "<group>";
+		};
+		5C3260A11EEA74F800DBE019 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5C3260A21EEA750400DBE019 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5C3260A81EEA781A00DBE019 /* 1.plist */,
+				5C3777431EEAD3C80016E54B /* EGShopModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5C3260A51EEA75DE00DBE019 /* flowLayout  */ = {
+			isa = PBXGroup;
+			children = (
+				5C3260A61EEA760900DBE019 /* EGWaterflowLayout.swift */,
+			);
+			path = "flowLayout ";
+			sourceTree = "<group>";
+		};
+		5C3260AA1EEA786500DBE019 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5C651A371EE6B129001366AE /* swiftBridge */ = {
@@ -469,6 +509,10 @@
 		5C7C5F861EDB117700FBD701 /* EGVideo */ = {
 			isa = PBXGroup;
 			children = (
+				5C3260AA1EEA786500DBE019 /* Cell */,
+				5C3260A51EEA75DE00DBE019 /* flowLayout  */,
+				5C3260A21EEA750400DBE019 /* Model */,
+				5C3260A11EEA74F800DBE019 /* View */,
 				5C7C5F871EDB119E00FBD701 /* EGVideoViewController.swift */,
 			);
 			path = EGVideo;
@@ -681,6 +725,7 @@
 			files = (
 				5C7C5F241ED9DC3C00FBD701 /* LaunchScreen.storyboard in Resources */,
 				5C7C5F211ED9DC3C00FBD701 /* Assets.xcassets in Resources */,
+				5C3260A91EEA781A00DBE019 /* 1.plist in Resources */,
 				5C7C5F1F1ED9DC3C00FBD701 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -805,6 +850,7 @@
 				5CD1DE7A1EDC3DB700F87275 /* EGHomeTableViewCell.swift in Sources */,
 				5C7C5F6B1ED9DC4700FBD701 /* EGPhotoPreviewer.swift in Sources */,
 				5C7C5F701ED9DC4800FBD701 /* EGSettingModel.swift in Sources */,
+				5C3777441EEAD3C80016E54B /* EGShopModel.swift in Sources */,
 				5C7C5F7A1ED9DC4800FBD701 /* EG_NoticeCenterDefine.swift in Sources */,
 				5C7C5F791ED9DC4800FBD701 /* EG_hirdLib_APPKey.swift in Sources */,
 				5C247E231EE7F92F00F31268 /* EGSheetTableViewCell.swift in Sources */,
@@ -820,9 +866,11 @@
 				5C7C5F741ED9DC4800FBD701 /* EGUIBarButtonItem_Extension.swift in Sources */,
 				5C7C5F831ED9DE9D00FBD701 /* EGTabBarController.swift in Sources */,
 				5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */,
+				5C3260A71EEA760900DBE019 /* EGWaterflowLayout.swift in Sources */,
 				5C7C5F6A1ED9DC4700FBD701 /* EGBaseModel.swift in Sources */,
 				5CD1DE841EDC5A5C00F87275 /* EGNetworkManager.swift in Sources */,
 				5CA2BF131EE4E96F00FE1CAF /* EGTapCircleCollectionViewCell.swift in Sources */,
+				5C3260AC1EEA787400DBE019 /* EGVideoCollectionViewCell.swift in Sources */,
 				5CA446FC1EDDB26F00F4B3FE /* EGRouter.swift in Sources */,
 				5C7C5F6E1ED9DC4800FBD701 /* EGSettingTableViewCell.swift in Sources */,
 				5CD1DE811EDC4DCD00F87275 /* EGStatusView.swift in Sources */,

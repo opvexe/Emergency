@@ -99,6 +99,7 @@ class EGHomeTableViewCell: UITableViewCell {
         
         //头像
         profileImageView.layer.masksToBounds = true
+        profileImageView.contentMode = .scaleAspectFit
         profileImageView.layer.cornerRadius = 20*ScreenScale
         //用户名
         screenNameLabel.setupSingleLabel(styleLabel: screenNameLabel, textColor: UIColor.themeBlackColors(), fontSize: 14*ScreenScale)

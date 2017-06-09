@@ -22,17 +22,17 @@ import UIKit
     }
     
     //高斯模糊
-  func originalImageBlur(originalImage:UIImage, blurAmount:NSNumber) -> UIImage {
-        
+  func originalImageBlur(originalImage:UIImage) -> UIImage {
+    
+         let contexts = CIContext.init(options: nil)
         let inputImage =  CIImage(image: originalImage)
         //使用高斯模糊滤镜
         let filter = CIFilter(name: "CIGaussianBlur")!
         filter.setValue(inputImage, forKey:kCIInputImageKey)
         //设置模糊半径值（越大越模糊）
-        filter.setValue(blurAmount, forKey: kCIInputRadiusKey)
+        filter.setValue(30.0, forKey: kCIInputRadiusKey)
         let outputCIImage = filter.outputImage!
-        let rect = CGRect(origin: CGPoint.zero, size: originalImage.size)
-        let contexts = CIContext.init(options: nil)
+        let rect = outputCIImage.extent
         let cgImage = contexts.createCGImage(outputCIImage, from: rect)
          return UIImage(cgImage: cgImage!)
     }
