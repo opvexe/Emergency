@@ -27,7 +27,7 @@ class EGTabBarController: UITabBarController ,UITabBarControllerDelegate {
         super.viewWillAppear(animated)
         tabBar.addSubview(addBtn)
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         addChildViewControllers()
@@ -44,8 +44,14 @@ extension EGTabBarController: PopMenuDelegate {
         switch index {
         case 0:  //发布说说
             break
-         case  1 ://相机
-            
+        case  1 ://相机
+            guard self.cameraPermissions() == false else {
+                if self.photoPermissions() == false {
+                    return  print("相册权限没打开")
+                }
+                return  present(EGShootCameraViewController(), animated: true, completion: nil)
+            }
+            print("相机权限没打开")
             break
         default:
             break

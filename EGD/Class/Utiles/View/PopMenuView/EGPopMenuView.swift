@@ -110,7 +110,7 @@ class EGPopMenuView: UIView {
         nevermindButton.isHidden = true
         nevermindButton.isUserInteractionEnabled = true
         nevermindButton.backgroundColor = UIColor.colorWithHexAlpha(0xFFFFFF, alpha: 1.0)
-        nevermindButton.tintColor = UIColor.themeLightGrayColors()
+        nevermindButton.tintColor = UIColor.themeBlackColors()
         
         nevermindButton.addTarget(self, action: #selector(clickMenu(sender:)), for: .touchUpInside)
         

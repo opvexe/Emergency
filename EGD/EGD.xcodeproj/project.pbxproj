@@ -15,6 +15,7 @@
 		5C3260AC1EEA787400DBE019 /* EGVideoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */; };
 		5C3777441EEAD3C80016E54B /* EGShopModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3777431EEAD3C80016E54B /* EGShopModel.swift */; };
 		5C37774A1EEB7F600016E54B /* EGPopMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3777491EEB7F600016E54B /* EGPopMenuView.swift */; };
+		5C3777521EEBFA9A0016E54B /* EGShootCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3777511EEBFA9A0016E54B /* EGShootCameraViewController.swift */; };
 		5C471AE61EE683B800464C31 /* EGVideoPicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AE51EE683B800464C31 /* EGVideoPicView.swift */; };
 		5C471AE81EE6884400464C31 /* EGDataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AE71EE6884400464C31 /* EGDataExtension.swift */; };
 		5C471AEC1EE6973B00464C31 /* EGUIButton_EGExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C471AEB1EE6973B00464C31 /* EGUIButton_EGExtension.swift */; };
@@ -86,6 +87,7 @@
 		5C3260AB1EEA787400DBE019 /* EGVideoCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGVideoCollectionViewCell.swift; sourceTree = "<group>"; };
 		5C3777431EEAD3C80016E54B /* EGShopModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGShopModel.swift; sourceTree = "<group>"; };
 		5C3777491EEB7F600016E54B /* EGPopMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGPopMenuView.swift; sourceTree = "<group>"; };
+		5C3777511EEBFA9A0016E54B /* EGShootCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGShootCameraViewController.swift; sourceTree = "<group>"; };
 		5C471AE51EE683B800464C31 /* EGVideoPicView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGVideoPicView.swift; sourceTree = "<group>"; };
 		5C471AE71EE6884400464C31 /* EGDataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGDataExtension.swift; sourceTree = "<group>"; };
 		5C471AEB1EE6973B00464C31 /* EGUIButton_EGExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGUIButton_EGExtension.swift; sourceTree = "<group>"; };
@@ -211,11 +213,36 @@
 			path = PopMenuView;
 			sourceTree = "<group>";
 		};
-		5C37774B1EEB93FB0016E54B /* NewFeature */ = {
+		5C37774C1EEBF9A00016E54B /* EGPublishShow */ = {
+			isa = PBXGroup;
+			children = (
+				5C3777501EEBFA7A0016E54B /* Photo */,
+				5C37774F1EEBFA320016E54B /* ShootCamera */,
+				5C37774D1EEBF9C80016E54B /* PublishSays */,
+			);
+			path = EGPublishShow;
+			sourceTree = "<group>";
+		};
+		5C37774D1EEBF9C80016E54B /* PublishSays */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = NewFeature;
+			path = PublishSays;
+			sourceTree = "<group>";
+		};
+		5C37774F1EEBFA320016E54B /* ShootCamera */ = {
+			isa = PBXGroup;
+			children = (
+				5C3777511EEBFA9A0016E54B /* EGShootCameraViewController.swift */,
+			);
+			path = ShootCamera;
+			sourceTree = "<group>";
+		};
+		5C3777501EEBFA7A0016E54B /* Photo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Photo;
 			sourceTree = "<group>";
 		};
 		5C651A371EE6B129001366AE /* swiftBridge */ = {
@@ -303,7 +330,7 @@
 		5C7C5F3E1ED9DC4700FBD701 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				5C37774B1EEB93FB0016E54B /* NewFeature */,
+				5C37774C1EEBF9A00016E54B /* EGPublishShow */,
 				5C7C5F451ED9DC4700FBD701 /* EGLoginRegister */,
 				5C7C5F3F1ED9DC4700FBD701 /* EGEmergency */,
 				5C7C5F861EDB117700FBD701 /* EGVideo */,
@@ -707,7 +734,7 @@
 				TargetAttributes = {
 					5C7C5F151ED9DC3C00FBD701 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = DVS4WL6GA8;
+						DevelopmentTeam = 3NJC3EGBWR;
 						ProvisioningStyle = Automatic;
 					};
 					5C7C5F291ED9DC3C00FBD701 = {
@@ -888,6 +915,7 @@
 				5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */,
 				5C3260A71EEA760900DBE019 /* EGWaterflowLayout.swift in Sources */,
 				5C7C5F6A1ED9DC4700FBD701 /* EGBaseModel.swift in Sources */,
+				5C3777521EEBFA9A0016E54B /* EGShootCameraViewController.swift in Sources */,
 				5CD1DE841EDC5A5C00F87275 /* EGNetworkManager.swift in Sources */,
 				5CA2BF131EE4E96F00FE1CAF /* EGTapCircleCollectionViewCell.swift in Sources */,
 				5C3260AC1EEA787400DBE019 /* EGVideoCollectionViewCell.swift in Sources */,
@@ -1045,12 +1073,14 @@
 			baseConfigurationReference = C9884EAF3EFF45A2F6D54B6A /* Pods-EGD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DVS4WL6GA8;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3NJC3EGBWR;
 				INFOPLIST_FILE = EGD/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Simon-DX.EGD";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Emergency.cndd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = /Users/jieku/Desktop/EG/EGD/Class/swiftBridge/swiftBridge.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1062,12 +1092,14 @@
 			baseConfigurationReference = 6B796910F81A4D910B13AD2B /* Pods-EGD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DVS4WL6GA8;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 3NJC3EGBWR;
 				INFOPLIST_FILE = EGD/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Simon-DX.EGD";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Emergency.cndd;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = /Users/jieku/Desktop/EG/EGD/Class/swiftBridge/swiftBridge.h;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -5,7 +5,6 @@
 //  Created by jieku on 2017/6/8.
 //
 //
-
 import UIKit
 import AVFoundation
 import SnapKit
@@ -13,8 +12,10 @@ import Photos
 
 protocol EGCameraViewDelegate: NSObjectProtocol {
     func takePhotoUseCameraAction(takePhotoFinishImage: UIImage)
+    func clickDissmiss()
 }
 typealias EGClickCameraBlock = ()->Void
+
 //方便以后抽调使用
 class EGCameraView: UIView{
     // MARK : AVCapture类
@@ -25,7 +26,7 @@ class EGCameraView: UIView{
     fileprivate var previewLayer: AVCaptureVideoPreviewLayer!
     //MARK : UIButton
     fileprivate var takePhotoButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 56, height: 56))
-    fileprivate var cameraBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 26))
+    fileprivate var cameraBackButton: UIButton = UIButton(frame: CGRect(x: 0, y: 0, width: 15, height: 25))
     fileprivate var flashLightButton: UIButton = UIButton(frame: CGRect(x: 20, y: 20, width: 25, height: 25))
     fileprivate var cameraSwitchButton: UIButton = UIButton(frame: CGRect(x: UIScreen.main.bounds.size.width - 20 - 30, y: 20, width: 30, height: 30))
     //MARK : 聚焦View/默认缩放/最大缩放
@@ -43,8 +44,8 @@ class EGCameraView: UIView{
     init(frame: CGRect, CameraPositon :AVCaptureDevicePosition){
         super.init(frame:frame)
         self.backgroundColor = UIColor.black
-        setUpUI()
         CameraPositon_ = CameraPositon
+        setUpUI()
         setUpGesture() //添加手势
         installCameraDevice()  //初始化相机
         startRunning()   //开始运行
@@ -69,7 +70,7 @@ extension EGCameraView {
         
         flashLightButton.tag = 102      //闪光灯
         flashLightButton.setImage(UIImage(named: "flashlight_auto"), for: UIControlState.normal)
-        flashLightButton.setImage(UIImage(named: "flashlight_auto_sel"), for: UIControlState.selected)
+        flashLightButton.setImage(UIImage(named: "flashlight_auto_sel"), for: UIControlState.highlighted)
         flashLightButton.addTarget(self, action: #selector(dothing), for: UIControlEvents.touchUpInside)
         
         cameraSwitchButton.tag = 103    //前置摄像头
@@ -97,7 +98,6 @@ extension EGCameraView {
             make.top.equalTo(takePhotoButton.snp.top)
             make.left.equalTo(self).offset(45)
         }
-
     }
 }
 // MARK :点击事件
@@ -121,7 +121,7 @@ extension EGCameraView {
         }
     }
     
-   @objc fileprivate func startRunning() {      //开始运行
+    @objc fileprivate func startRunning() {      //开始运行
         if session.isRunning == false {
             session.startRunning()
         }
@@ -147,7 +147,7 @@ extension EGCameraView {
     }
     
     @objc fileprivate func back(){          //返回
-        
+        delegate?.clickDissmiss()
     }
     
     @objc fileprivate func swithFlash(){    //闪光灯切换
@@ -156,10 +156,16 @@ extension EGCameraView {
         if device.hasFlash == false { return  print("设备不支持闪光灯")}
         if device.flashMode == AVCaptureFlashMode.off {
             device.flashMode = AVCaptureFlashMode.on
+            flashLightButton.setImage(UIImage(named: "flashlight_on"), for: UIControlState.normal)
+            flashLightButton.setImage(UIImage(named: "flashlight_on_sel"), for: UIControlState.highlighted)
         }else if device.flashMode == AVCaptureFlashMode.on{
             device.flashMode = AVCaptureFlashMode.auto
+            flashLightButton.setImage(UIImage(named: "flashlight_auto"), for: UIControlState.normal)
+            flashLightButton.setImage(UIImage(named: "flashlight_auto_sel"), for: UIControlState.highlighted)
         }else if device.flashMode == AVCaptureFlashMode.auto {
             device.flashMode = AVCaptureFlashMode.off
+            flashLightButton.setImage(UIImage(named: "flashlight_off"), for: UIControlState.normal)
+            flashLightButton.setImage(UIImage(named: "flashlight_off_sel"), for: UIControlState.highlighted)
         }
         device.unlockForConfiguration()
     }
@@ -215,9 +221,9 @@ extension EGCameraView {
     
     @objc fileprivate func isCameraBack() ->Bool { //判断摄像头的方向
         guard CameraPositon_ == AVCaptureDevicePosition.back else {
-               return false
+            return false
         }
-         return true
+        return true
     }
     
 }
@@ -225,14 +231,14 @@ extension EGCameraView {
 //MARK :  初始化相机相关
 extension EGCameraView {
     
-   @objc fileprivate func installCameraDevice() {
+    @objc fileprivate func installCameraDevice() {
         guard let devices = AVCaptureDevice.devices(withMediaType: AVMediaTypeVideo) as? [AVCaptureDevice] else { return }
- 
+        
         guard let dfilter = devices.filter({ return $0.position == CameraPositon_ }).first else{ return}
         device = dfilter
         guard let inputDevice = try? AVCaptureDeviceInput(device: dfilter) else { return }
         self.videoInput = inputDevice
-
+        
         session.sessionPreset = AVCaptureSessionPresetHigh
         stillImageOutput.outputSettings = [AVVideoCodecKey:AVVideoCodecJPEG]
         if session.canAddInput(inputDevice) == true {
@@ -241,12 +247,12 @@ extension EGCameraView {
         if session.canAddOutput(stillImageOutput) == true {
             session.addOutput(stillImageOutput)
         }
-    
+        
         previewLayer = AVCaptureVideoPreviewLayer.init(session: session)
         previewLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
         previewLayer?.frame = self.bounds
         self.layer.addSublayer(previewLayer)
-    //锁定设备之后才能修改设置,修改完再锁上 否则会崩溃
+        //锁定设备之后才能修改设置,修改完再锁上 否则会崩溃
         do{ try dfilter.lockForConfiguration() }catch{ }
         if dfilter.hasFlash == false { return }
         dfilter.flashMode = AVCaptureFlashMode.auto
@@ -272,4 +278,3 @@ extension EGCameraView: UIGestureRecognizerDelegate {
         return true
     }
 }
-
