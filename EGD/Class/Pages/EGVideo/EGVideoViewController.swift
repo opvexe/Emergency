@@ -18,6 +18,7 @@ class EGVideoViewController: UIViewController {
         layout.delegate = self
         let VideoCollectionView = UICollectionView.init(frame: self.view.bounds, collectionViewLayout: layout)
         VideoCollectionView.dataSource = self
+        VideoCollectionView.delegate   = self 
         VideoCollectionView.backgroundColor = UIColor.white
         VideoCollectionView.register(EGVideoCollectionViewCell.self, forCellWithReuseIdentifier: VideoCollectionCellID)
         return VideoCollectionView
@@ -63,7 +64,7 @@ extension EGVideoViewController {
     }
 }
 
-extension EGVideoViewController: UICollectionViewDataSource, EGWaterflowLayoutDelegate{
+extension EGVideoViewController: UICollectionViewDataSource,UICollectionViewDelegate , EGWaterflowLayoutDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.shopDataSouceArray.count
@@ -101,5 +102,10 @@ extension EGVideoViewController: UICollectionViewDataSource, EGWaterflowLayoutDe
     //内边距
     func edgeInsetsInWaterflowLayout(waterflowLayout: EGWaterflowLayout) -> UIEdgeInsets {
         return UIEdgeInsets.init(top: 10, left: 5, bottom: 50, right: 5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        self.navigationController?.pushViewController(EGShopCarViewController(), animated: true)
     }
 }
