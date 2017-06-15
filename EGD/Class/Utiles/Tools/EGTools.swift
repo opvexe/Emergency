@@ -80,4 +80,18 @@ extension NSObject {
             return false
         }
     }
+    
+    /**
+     *  传入设计师提供的高度获得适配屏幕的真实高度（我们设计师提供的图片的标准是iPhone 5(@2x) : 375.0 x 667）
+     *
+     *  @param designHeight 设计师提供的宽度
+     *
+     *  @return 适配屏幕的真实宽度
+     */
+    
+    func xmc_realWidth(_ designWidth :CGFloat) -> CGFloat {
+        
+        return  (designWidth * (UIScreen.main.bounds.size.width) / 375.0)
+    }
+    
 }
