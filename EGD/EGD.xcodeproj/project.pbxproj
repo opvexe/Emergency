@@ -24,12 +24,10 @@
 		5C7C5F211ED9DC3C00FBD701 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C7C5F201ED9DC3C00FBD701 /* Assets.xcassets */; };
 		5C7C5F241ED9DC3C00FBD701 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C7C5F221ED9DC3C00FBD701 /* LaunchScreen.storyboard */; };
 		5C7C5F2F1ED9DC3C00FBD701 /* EGDTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F2E1ED9DC3C00FBD701 /* EGDTests.swift */; };
-		5C7C5F6A1ED9DC4700FBD701 /* EGBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F421ED9DC4700FBD701 /* EGBaseModel.swift */; };
 		5C7C5F6B1ED9DC4700FBD701 /* EGPhotoPreviewer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */; };
 		5C7C5F6D1ED9DC4800FBD701 /* EGMineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F4C1ED9DC4700FBD701 /* EGMineViewController.swift */; };
 		5C7C5F6E1ED9DC4800FBD701 /* EGSettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F4F1ED9DC4700FBD701 /* EGSettingTableViewCell.swift */; };
 		5C7C5F6F1ED9DC4800FBD701 /* EGSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F511ED9DC4700FBD701 /* EGSettingViewController.swift */; };
-		5C7C5F701ED9DC4800FBD701 /* EGSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F531ED9DC4700FBD701 /* EGSettingModel.swift */; };
 		5C7C5F711ED9DC4800FBD701 /* EGMineTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F571ED9DC4700FBD701 /* EGMineTopView.swift */; };
 		5C7C5F721ED9DC4800FBD701 /* EG_UIDeviceExtent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F5A1ED9DC4700FBD701 /* EG_UIDeviceExtent.swift */; };
 		5C7C5F731ED9DC4800FBD701 /* EGImageExtent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C7C5F5B1ED9DC4700FBD701 /* EGImageExtent.swift */; };
@@ -60,6 +58,8 @@
 		5CD1DE811EDC4DCD00F87275 /* EGStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE801EDC4DCD00F87275 /* EGStatusView.swift */; };
 		5CD1DE841EDC5A5C00F87275 /* EGNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CD1DE831EDC5A5C00F87275 /* EGNetworkManager.swift */; };
 		687E1A7A011094553FFBE029 /* Pods_EGD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1F2C924040393AD203B23A27 /* Pods_EGD.framework */; };
+		A68706C81F25DB32005E83CE /* EGSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68706C71F25DB32005E83CE /* EGSettingModel.swift */; };
+		A68706CA1F25DB5C005E83CE /* EGBaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68706C91F25DB5C005E83CE /* EGBaseModel.swift */; };
 		ECC2E2D0158BA548B9A3350E /* Pods_EGDTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26131F721D1751D8ECE165EB /* Pods_EGDTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -101,12 +101,10 @@
 		5C7C5F2A1ED9DC3C00FBD701 /* EGDTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EGDTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C7C5F2E1ED9DC3C00FBD701 /* EGDTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EGDTests.swift; sourceTree = "<group>"; };
 		5C7C5F301ED9DC3C00FBD701 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5C7C5F421ED9DC4700FBD701 /* EGBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGBaseModel.swift; path = ../../Pages/EGEmergency/Model/EGBaseModel.swift; sourceTree = "<group>"; };
 		5C7C5F441ED9DC4700FBD701 /* EGPhotoPreviewer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGPhotoPreviewer.swift; path = ../../View/EGPhotoPreviewer.swift; sourceTree = "<group>"; };
 		5C7C5F4C1ED9DC4700FBD701 /* EGMineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGMineViewController.swift; sourceTree = "<group>"; };
 		5C7C5F4F1ED9DC4700FBD701 /* EGSettingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGSettingTableViewCell.swift; sourceTree = "<group>"; };
 		5C7C5F511ED9DC4700FBD701 /* EGSettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGSettingViewController.swift; sourceTree = "<group>"; };
-		5C7C5F531ED9DC4700FBD701 /* EGSettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGSettingModel.swift; path = ../../Pages/EGMine/EGSetting/Model/EGSettingModel.swift; sourceTree = "<group>"; };
 		5C7C5F571ED9DC4700FBD701 /* EGMineTopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGMineTopView.swift; sourceTree = "<group>"; };
 		5C7C5F5A1ED9DC4700FBD701 /* EG_UIDeviceExtent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EG_UIDeviceExtent.swift; sourceTree = "<group>"; };
 		5C7C5F5B1ED9DC4700FBD701 /* EGImageExtent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGImageExtent.swift; sourceTree = "<group>"; };
@@ -138,6 +136,8 @@
 		5CD1DE831EDC5A5C00F87275 /* EGNetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EGNetworkManager.swift; sourceTree = "<group>"; };
 		6B796910F81A4D910B13AD2B /* Pods-EGD.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGD.release.xcconfig"; path = "Pods/Target Support Files/Pods-EGD/Pods-EGD.release.xcconfig"; sourceTree = "<group>"; };
 		A20014F71F457CEDB6BC945E /* Pods-EGDTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGDTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EGDTests/Pods-EGDTests.release.xcconfig"; sourceTree = "<group>"; };
+		A68706C71F25DB32005E83CE /* EGSettingModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGSettingModel.swift; path = Class/Pages/EGMine/EGSetting/Model/EGSettingModel.swift; sourceTree = SOURCE_ROOT; };
+		A68706C91F25DB5C005E83CE /* EGBaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EGBaseModel.swift; path = Class/Pages/EGEmergency/Model/EGBaseModel.swift; sourceTree = SOURCE_ROOT; };
 		C9884EAF3EFF45A2F6D54B6A /* Pods-EGD.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EGD.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EGD/Pods-EGD.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -286,7 +286,6 @@
 		5C7C5F3E1ED9DC4700FBD701 /* Pages */ = {
 			isa = PBXGroup;
 			children = (
-				5C7C5F451ED9DC4700FBD701 /* EGLoginRegister */,
 				5C7C5F3F1ED9DC4700FBD701 /* EGEmergency */,
 				5C7C5F861EDB117700FBD701 /* EGVideo */,
 				5C7C5F8C1EDB125100FBD701 /* EGLivingShow */,
@@ -329,37 +328,6 @@
 				5C7C5F901EDB23F400FBD701 /* EGCircleView.swift */,
 				5C7C5F921EDB299900FBD701 /* EGCircleCollectionViewCell.swift */,
 				5CD1DE801EDC4DCD00F87275 /* EGStatusView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
-		5C7C5F451ED9DC4700FBD701 /* EGLoginRegister */ = {
-			isa = PBXGroup;
-			children = (
-				5C7C5F461ED9DC4700FBD701 /* Controller */,
-				5C7C5F481ED9DC4700FBD701 /* Model */,
-				5C7C5F491ED9DC4700FBD701 /* View */,
-			);
-			path = EGLoginRegister;
-			sourceTree = "<group>";
-		};
-		5C7C5F461ED9DC4700FBD701 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		5C7C5F481ED9DC4700FBD701 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		5C7C5F491ED9DC4700FBD701 /* View */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -598,8 +566,8 @@
 		5CD1DE7D1EDC431A00F87275 /* BaseModel */ = {
 			isa = PBXGroup;
 			children = (
-				5C7C5F531ED9DC4700FBD701 /* EGSettingModel.swift */,
-				5C7C5F421ED9DC4700FBD701 /* EGBaseModel.swift */,
+				A68706C91F25DB5C005E83CE /* EGBaseModel.swift */,
+				A68706C71F25DB32005E83CE /* EGSettingModel.swift */,
 			);
 			path = BaseModel;
 			sourceTree = "<group>";
@@ -688,7 +656,7 @@
 				TargetAttributes = {
 					5C7C5F151ED9DC3C00FBD701 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = DVS4WL6GA8;
+						DevelopmentTeam = 3NJC3EGBWR;
 						ProvisioningStyle = Automatic;
 					};
 					5C7C5F291ED9DC3C00FBD701 = {
@@ -849,7 +817,6 @@
 				5C7C5F1A1ED9DC3C00FBD701 /* AppDelegate.swift in Sources */,
 				5CD1DE7A1EDC3DB700F87275 /* EGHomeTableViewCell.swift in Sources */,
 				5C7C5F6B1ED9DC4700FBD701 /* EGPhotoPreviewer.swift in Sources */,
-				5C7C5F701ED9DC4800FBD701 /* EGSettingModel.swift in Sources */,
 				5C3777441EEAD3C80016E54B /* EGShopModel.swift in Sources */,
 				5C7C5F7A1ED9DC4800FBD701 /* EG_NoticeCenterDefine.swift in Sources */,
 				5C7C5F791ED9DC4800FBD701 /* EG_hirdLib_APPKey.swift in Sources */,
@@ -861,13 +828,13 @@
 				5CBE11A81EE7EE48006A9304 /* EGActionSheetView.swift in Sources */,
 				5C7C5F711ED9DC4800FBD701 /* EGMineTopView.swift in Sources */,
 				5C7C5F8F1EDB167100FBD701 /* EGTools.swift in Sources */,
+				A68706CA1F25DB5C005E83CE /* EGBaseModel.swift in Sources */,
 				5C7C5F771ED9DC4800FBD701 /* EG_API_HOSTDefine.swift in Sources */,
 				5CA446F81EDD9BF700F4B3FE /* EGCircleController.swift in Sources */,
 				5C7C5F741ED9DC4800FBD701 /* EGUIBarButtonItem_Extension.swift in Sources */,
 				5C7C5F831ED9DE9D00FBD701 /* EGTabBarController.swift in Sources */,
 				5CD1DE7C1EDC42D300F87275 /* EGLivingShowViewController.swift in Sources */,
 				5C3260A71EEA760900DBE019 /* EGWaterflowLayout.swift in Sources */,
-				5C7C5F6A1ED9DC4700FBD701 /* EGBaseModel.swift in Sources */,
 				5CD1DE841EDC5A5C00F87275 /* EGNetworkManager.swift in Sources */,
 				5CA2BF131EE4E96F00FE1CAF /* EGTapCircleCollectionViewCell.swift in Sources */,
 				5C3260AC1EEA787400DBE019 /* EGVideoCollectionViewCell.swift in Sources */,
@@ -879,6 +846,7 @@
 				5C7C5F881EDB119E00FBD701 /* EGVideoViewController.swift in Sources */,
 				5C7C5F731ED9DC4800FBD701 /* EGImageExtent.swift in Sources */,
 				5C7C5F7B1ED9DC4800FBD701 /* EG_ThirdLib_APPKey.swift in Sources */,
+				A68706C81F25DB32005E83CE /* EGSettingModel.swift in Sources */,
 				5C7C5F851ED9E19500FBD701 /* EGEmergencyViewController.swift in Sources */,
 				5CD1DE7F1EDC466B00F87275 /* EGEmergencyModel.swift in Sources */,
 				5C7C5F911EDB23F400FBD701 /* EGCircleView.swift in Sources */,
@@ -1025,13 +993,13 @@
 			baseConfigurationReference = C9884EAF3EFF45A2F6D54B6A /* Pods-EGD.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DVS4WL6GA8;
+				DEVELOPMENT_TEAM = 3NJC3EGBWR;
 				INFOPLIST_FILE = EGD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Simon-DX.EGD";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shumin.cn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/jieku/Desktop/EG/EGD/Class/swiftBridge/swiftBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/swiftBridge/swiftBridge.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1042,13 +1010,13 @@
 			baseConfigurationReference = 6B796910F81A4D910B13AD2B /* Pods-EGD.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = DVS4WL6GA8;
+				DEVELOPMENT_TEAM = 3NJC3EGBWR;
 				INFOPLIST_FILE = EGD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Simon-DX.EGD";
+				PRODUCT_BUNDLE_IDENTIFIER = com.shumin.cn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/jieku/Desktop/EG/EGD/Class/swiftBridge/swiftBridge.h;
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Class/swiftBridge/swiftBridge.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
